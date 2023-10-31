@@ -13,7 +13,8 @@ export default defineConfig({
       "meta",
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
     ],
-    ['link', { rel: 'icon', href: '/mtcute-logo.png' }]
+    ['link', { rel: 'icon', href: '/mtcute-logo.png' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500&text=mtcute' }]
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

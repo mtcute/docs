@@ -103,7 +103,7 @@
     #c890d6 50%,
     #f69ddc 50%
   );
-  --vp-home-hero-image-filter: blur(44px) opacity(0.3);
+  --vp-home-hero-image-filter: blur(44px) opacity(0.2);
 }
 
 /**
@@ -170,4 +170,9 @@
 .medium-zoom-overlay,
 .medium-zoom-image--opened {
   z-index: 999;
+}
+
+.main .name .clip {
+  font-family: Fredoka, sans-serif;
+  font-weight: 500;
 }
