@@ -36,7 +36,8 @@ This means **less overhead**, since the data is sent directly to you,
 and not passed through the Bot API server and then sent to you via HTTP:
 
 <v-img
-    src="https://i.gyazo.com/b2f075608aa06a6da50ed3f1679f42d3.png"
+    src="/guide/assets/mtproto_vs_botapi.svg"
+    adaptive="true"
 />
 
 Apart from smaller overhead, using MTProto has many other advantages, including:

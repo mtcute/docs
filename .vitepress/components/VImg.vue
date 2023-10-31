@@ -4,6 +4,7 @@
             :src="src"
             :alt="alt || caption"
             :style="{'max-width': width ? width + 'px' : undefined}"
+            :class="{'img-adaptive': adaptive}"
         >
         <span v-if="caption">{{ caption || alt }}</span>
     </p>
@@ -14,7 +15,7 @@ import mediumZoom from 'medium-zoom'
 
 export default {
     name: 'VImg',
-    props: ['src', 'alt', 'caption', 'width'],
+    props: ['src', 'alt', 'caption', 'width', 'adaptive'],
     mounted() {
         mediumZoom(this.$el.querySelector('img'), {
             margin: 24,
@@ -35,6 +36,10 @@ export default {
 .img-wrap span {
     margin-top: 4px;
     font-size: 14px;
-    color: #666;
+    color: var(--vp-c-text-2);
+}
+
+.dark .img-wrap .img-adaptive {
+    filter: invert(1);
 }
 </style>
