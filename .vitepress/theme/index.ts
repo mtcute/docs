@@ -8,6 +8,8 @@ import 'vitepress-plugin-back-to-top/dist/style.css'
 
 // @ts-ignore
 import VImg from '../components/VImg.vue'
+// @ts-ignore
+import EmbedPost from '../components/EmbedPost.vue'
 
 import './style.css'
 
@@ -20,6 +22,7 @@ export default {
   },
   enhanceApp({ app, router, siteData }) {
     app.component('v-img', VImg)
+    app.component('EmbedPost', EmbedPost)
     vitepressBackToTop({
       threshold: 300
     })

@@ -165,7 +165,7 @@ avoid using VOIP numbers and try to minimize server load generated
 Anya from [@theyforcedme](https://t.me/theyforcedme) has shared her thoughts on this
 in Pyrogram chat:
 
-<iframe src="https://t.me/PyrogramChat/69424?embed=1" height="331px" />
+<EmbedPost link="PyrogramChat/69424" height="331px" />
 
 ## I was banned, help!
 

@@ -176,3 +176,11 @@
   font-family: Fredoka, sans-serif;
   font-weight: 500;
 }
+
+.dark .go-to-top {
+  background-color: var(--vp-c-bg-elv);
+}
+
+.dark .go-to-top:hover {
+  background-color: var(--vp-c-bg-alt);
+}
