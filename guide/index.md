@@ -110,12 +110,16 @@ Deno is currently not supported, and there are no plans to support it in the nea
 
 Consider using NodeJS instead.
 
+Deno did manage to *start* ([gist](https://gist.github.com/teidesu/dd43a98a6d694cab73000768b818fd54)), but it's not 
+actively tested, and there are no guarantees that it will work in more complex scenarios.
+
 ### Anything else?
 
 mtcute supports both ESM and CJS, so it should work in any environment that supports either of them,
 as long as it also supports these featues:
   - `ArrayBuffer`, `Uint8Array`, `TextEncoder/TextDecoder` - for binary data
   - `ReadableStream` - for uploading/downloading files
+  - `SubtleCrypto` - for crypto functions (optional if using custom crypto)
 
 Of course, nothing is stopping you from bundling the library with Webpack or Rollup and using some polyfills.
 
