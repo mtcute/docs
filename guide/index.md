@@ -77,8 +77,11 @@ Usage in browsers is a less common use case, so there's no scaffolding tool for 
 You can still add the library manually, though:
 
 ```bash
-pnpm add @mtcute/client
+pnpm add @mtcute/client @cryptography/aes
 ```
+
+> Currently `@cryptography/aes` is a required peer dependency when targeting browsers.
+> This is likely to change in the near future
 
 and then use it as you wish:
 
@@ -103,10 +106,9 @@ Bun is not actively supported, but mtcute seems to work fine with it.
 You can use it the same way as in NodeJS.
 
 ### Deno
-If your project is using Deno, you should consider deleting your project.
+Deno is currently not supported, and there are no plans to support it in the near future.
 
-Deno is not supported and **will never be supported**.
-It is a terrible platform that is not suitable for anything.
+Consider using NodeJS instead.
 
 ### Anything else?
 
