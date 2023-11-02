@@ -36,7 +36,7 @@ This means **less overhead**, since the data is sent directly to you,
 and not passed through the Bot API server and then sent to you via HTTP:
 
 <v-img
-    src="/guide/assets/mtproto_vs_botapi.svg"
+    src="/assets/mtproto_vs_botapi.svg"
     adaptive="true"
 />
 

@@ -39,7 +39,7 @@ export default {
     color: var(--vp-c-text-2);
 }
 
-.dark .img-wrap .img-adaptive {
+.dark .img-adaptive {
     filter: invert(1);
 }
 </style>
