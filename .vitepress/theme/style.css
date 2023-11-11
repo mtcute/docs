@@ -184,3 +184,9 @@
 .dark .go-to-top:hover {
   background-color: var(--vp-c-bg-alt);
 }
+
+.index-footnote {
+  display: block;
+  text-align: center;
+  margin-top: 32px;
+}

@@ -35,3 +35,7 @@ features:
     title: Up-to-date
     details: mtcute uses the latest TL schema to provide the newest features as soon as possible
 ---
+
+<small class="index-footnote">
+* Tested on a personal account and a few small-load bots
+</small>
