@@ -16,7 +16,7 @@ Just follow the instructions and you'll get a working bot in no time!
 
 For existing projects, you'll probably want to add it manually, though.
 
-> **Note**: mtcute is currently targeting TypeScript 5.1. 
+> **Note**: mtcute is currently targeting TypeScript 5.0. 
 > If you are using an older version of TypeScript, please consider upgrading.
 
 1. Get your API ID and Hash at
@@ -106,8 +106,7 @@ Bun is not actively supported, but mtcute seems to work fine with it.
 You can use it the same way as in NodeJS.
 
 ### Deno
-Deno is currently not supported, and there are no plans to support it in the near future.
-
+Deno is not activaly supported too, and there are no plans to support it in the near future.
 Consider using NodeJS instead.
 
 Deno did manage to *start* ([gist](https://gist.github.com/teidesu/dd43a98a6d694cab73000768b818fd54)), but it's not 
@@ -119,7 +118,7 @@ mtcute supports both ESM and CJS, so it should work in any environment that supp
 as long as it also supports these featues:
   - `ArrayBuffer`, `Uint8Array`, `TextEncoder/TextDecoder` - for binary data
   - `ReadableStream` - for uploading/downloading files
-  - `SubtleCrypto` - for crypto functions (optional if using custom crypto)
+  - `SubtleCrypto`, `WebAssembly` - for crypto functions (optional if using custom crypto)
 
 Of course, nothing is stopping you from bundling the library with Webpack or Rollup and using some polyfills.
 

@@ -1,5 +1,7 @@
 # FAQ
 
+> except the only person who has ever asked them was my alter ego
+
 Miscellaneous questions about the library and Telegram API as a whole
 that don't really belong to any other topic.
 

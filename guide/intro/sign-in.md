@@ -133,3 +133,110 @@ Telegram might be limited.
 
 To learn how to set up a connection through proxy,
 refer to [Transport](../topics/transport.html#http-s-proxy-transport) documentation
+
+## Manual sign in
+
+So far we've only discussed the `.run`/`.start` helper methods. 
+
+While they do provide some flexibility and convenience, they are not always
+suitable for every use case. For example, when building a web application,
+you might want to use a different way to ask for user input.
+
+In that case, you can use the underlying sign-in methods directly
+
+<!-- TODO link to full example -->
+
+First, check if you are already signed in:
+
+```ts
+async function checkSignedIn() {
+    try {
+        // Try calling any method that requires authorization
+        // (getMe is the simplest one and likely the most useful,
+        // but you can use any other)
+        return await tg.getMe()
+    } catch (e) {
+        if (tl.RpcError.is(e, 'AUTH_KEY_UNREGISTERED')) {
+            // Not signed in, continue
+            return null
+        } else {
+            // Some other error, rethrow
+            throw e
+        }
+    }
+}
+```
+
+If you are not signed in, you should first use `.sendCode` method:
+
+```ts
+// phone can be in pretty much any format, 
+// mtcute will automatically normalize it
+const phone = '+7 999 123 4567'
+const code = await tg.sendCode({ phone })
+```
+
+The `code` object will contain [information about the sent code](https://ref.mtcute.dev/classes/_mtcute_client.index.SentCode.html), 
+including the `phoneCodeHash` that you will need to use later.
+
+Now, you need to ask the user for the code and call `.signIn` method:
+
+```ts
+const code = '12345' // code from user input
+
+const user = await tg.signIn({
+    phone,
+    phoneCodeHash: code.phoneCodeHash,
+    phoneCode: code
+})
+```
+
+This method may either return right away, or throw one of:
+  - `SESSION_PASSWORD_NEEDED` if the account has 2FA enabled, and you should [enter the password](#handling-2fa)
+  - `PHONE_CODE_INVALID` if the code entered was invalid
+  - `PHONE_CODE_EXPIRED` if the code has expired, and you should [resend it](#resending-code)
+
+### Handling 2FA
+
+If the account has 2FA enabled, you will need to ask the user for the password, and then call `.checkPassword`:
+
+```ts
+const password = 'hunter2' // password from user input
+
+const user = await tg.checkPassword(password)
+```
+
+In case of invalid password, this method will throw `PASSWORD_HASH_INVALID`.
+
+### Resending code
+
+In some cases, the code may expire before the user enters it, or it may never arrive,
+so you may want to resend it. To do that, you can use `.resendCode` method:
+
+```ts
+code = await tg.resendCode({
+    phone,
+    phoneCodeHash: code.phoneCodeHash
+})
+```
+
+::: tip
+You can know beforehand the type of the next code that will be sent
+using the [`code.nextType`](https://ref.mtcute.dev/classes/_mtcute_client.index.SentCode.html#nextType) field
+:::
+
+### Updates
+
+If you want the updates to be processed, you should manually use `startUpdatesLoop` once you are signed in:
+
+```ts
+if (await checkSignedIn()) {
+    tg.startUpdatesLoop()
+} else {
+    // some sign in logic
+
+    tg.startUpdatesLoop()
+}
+```
+
+`tg.start`/`tg.run` methods do this automatically for you.
