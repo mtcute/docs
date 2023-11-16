@@ -4,7 +4,7 @@ We've already briefly [touched](../intro/updates.html) on what Dispatcher is,
 but as a quick reminder: Dispatcher is a class that processes
 updates from the client and *dispatches* them to the registered handlers.
 
-It is implemented and exported from `@mtcute/dispatcher`.
+It is implemented in `@mtcute/dispatcher` package
 
 ## Setting up
 
