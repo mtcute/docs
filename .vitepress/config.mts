@@ -1,8 +1,8 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, HeadConfig } from "vitepress";
 import markdownItFootnotes from "markdown-it-footnote";
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default ({ mode }) => defineConfig({
   title: "mtcute",
   description: "mtcute documentation",
   lastUpdated: true,
@@ -14,8 +14,20 @@ export default defineConfig({
       { name: "apple-mobile-web-app-status-bar-style", content: "black" },
     ],
     ['link', { rel: 'icon', href: '/mtcute-logo.png' }],
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500&text=mtcute' }]
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fredoka:wght@500&text=mtcute' }],
+    ...(mode === 'production' ? [
+        ['script', { async: '', src: 'https://zond.tei.su/script.js', 'data-website-id': '968f50a2-4cf8-4e31-9f40-1abd48ba2086' }] as HeadConfig
+      ] : []),
   ],
+  transformHtml(code) {
+    if (mode !== 'production') return code
+
+    // this is a hack but whatever
+    return code.replace(
+      '<body>', 
+      '<body><noscript><div><img src="https://tei.su/zond.php?website=968f50a2-4cf8-4e31-9f40-1abd48ba2086" style="position:absolute; left:-9999px;" alt="" /></div></noscript>'
+    )
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
