@@ -172,7 +172,7 @@ is included, which results in an average of **407** characters
 
 The easiest way to implement a custom storage would be to
 make a subclass of `MemoryStorage` or `JsonMemoryStorage`,
-or check the [source code of SqliteStorage](https://github.com/mtcute/mtcute/blob/master/packages/sqlite/index.ts)
+or check the [source code of SqliteStorage](https://github.com/mtcute/mtcute/blob/master/packages/sqlite/src/index.ts)
 and implement something similar with your DB of choice.
 
 ## Storage for Dispatcher
