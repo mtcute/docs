@@ -200,3 +200,57 @@ if (peer < 0) {
 
 And then, to convert it back to bare ID, use the exact same operation
 (it works in two directions).
+
+## Incomplete peers
+
+In some rare cases, mtcute may not be able to immediately provide you with complete information 
+about a user/chat (see [min constructors](https://core.telegram.org/api/min) in MTProto docs).
+
+This currently only happens for `msg.sender` field for non-bot accounts in chats larger than 40k members, 
+so if you're only ever going to work with bots, you can safely ignore this section. 
+
+::: tip
+Complete peers ≠ [full peers](https://ref.mtcute.dev/classes/_mtcute_client.index.TelegramClient.html#getFullChat)!
+
+- Incomplete are seen in updates in rare cases, and are missing some fields (e.g. username)
+- Complete peers are pretty much all the other peer objects you get in updates
+- Full peers are objects with additional information (e.g. bio) which you should request explicitly
+:::
+
+For such chats, the server may send "min" constructors, which contain incomplete information about the user/chat.
+To avoid blocking the updates loop, and since the missing information is not critical, mtcute will return an incomplete
+peer object, which is *good enough* for most cases.
+
+For example, such `User` objects may have the following data missing or have incorrect values:
+ - `.username` may be missing
+ - `.photo` may be missing with some privacy settings
+ - online status may be incorrect
+ - and probably more
+
+The user itself is still usable, though. If you need to get the missing information, you can call
+`getUsers`/`getChat` method, which will return a complete `User`/`Chat` object.
+
+```ts
+const user = ... // incomplete user from somewhere
+const [completeUser] = await tg.getUsers(user)
+```
+
+If you are using [Dispatcher](/guide/dispatcher/intro.md), you can use `.getCompleteSender()` method instead:
+
+```ts
+dp.onNewMessage(async (msg) => {
+    const sender = await msg.getCompleteSender()
+})
+```
+
+Or you can use `withCompleteSender` middleware-like filter:
+
+```ts
+dp.onNewMessage(
+  filters.withCompleteSender(filters.sender('user'))
+  async (msg) => {
+    const user = msg.sender
+    // user is guaranteed to be complete
+  }
+)
+```
