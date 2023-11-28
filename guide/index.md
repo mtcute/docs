@@ -77,11 +77,18 @@ Usage in browsers is a less common use case, so there's no scaffolding tool for 
 You can still add the library manually, though:
 
 ```bash
-pnpm add @mtcute/client @cryptography/aes
+pnpm add @mtcute/client
 ```
 
-> Currently `@cryptography/aes` is a required peer dependency when targeting browsers.
-> This is likely to change in the near future
+> For vite, you'll also need to deoptimize `@mtcute/wasm` (see [vite#8427](https://github.com/vitejs/vite/issues/8427)):
+> ```ts
+> // in vite.config.ts
+> export default defineConfig({
+>   optimizeDeps: {
+>     exclude: ['@mtcute/wasm']
+>   }
+> })
+> ```
 
 and then use it as you wish:
 
@@ -100,17 +107,26 @@ See also: [Tree-shaking](/guide/topics/treeshaking.md)
 
 ## Other runtimes
 
-### Bun
-Bun is not actively supported, but mtcute seems to work fine with it.
+### Bun/Deno
+These runtimes are not actively supported and tested, but mtcute *seems* to work fine with them.
 
-You can use it the same way as in NodeJS.
+For Deno, however, you'll have to manually use the web crypto provider, since the Node
+compatibility layer is not good enough yet:
 
-### Deno
-Deno is not activaly supported too, and there are no plans to support it in the near future.
-Consider using NodeJS instead.
+```ts
+import { TelegramClient } from 'npm:@mtcute/client'
+import { WebCryptoProvider } from 'npm:@mtcute/core/utils/crypto/web.js'
 
-Deno did manage to *start* ([gist](https://gist.github.com/teidesu/dd43a98a6d694cab73000768b818fd54)), but it's not 
-actively tested, and there are no guarantees that it will work in more complex scenarios.
+const tg = new TelegramClient({
+  crypto: () => new WebCryptoProvider({ crypto: window.crypto }),
+  // ...
+})
+```
+Other than that, you can likely use it the same way as in NodeJS. 
+
+If you find any issues when running in Bun/Deno, please first check if they are 
+reproducible in Node. Feel free to open an issue in both cases, but please note that
+issues with alternative runtimes interop are not a priority.
 
 ### Anything else?
 
