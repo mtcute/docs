@@ -12,7 +12,7 @@ and never persist it anywhere, and this is exactly
 what `MemoryStorage` does.
 
 ```ts{4}
-import { MemoryStorage } from '@mcute/core'
+import { MemoryStorage } from '@mcute/core/storage/memory.js'
 
 const tg = new TelegramClient({
     storage: new MemoryStorage()
@@ -26,48 +26,6 @@ With in-memory storage, you will need to re-authorize every time
 (assuming you don't use [session strings](#session-strings)),
 and also caching won't work past a single run.
 :::
-
-## JSON-based storage
-
-`MemoryStorage` internally uses a simple JavaScript object
-containing all the data that should be persisted.
-`JsonMemoryStorage` is a subclass that implements methods
-to import and export the current storage to/from JSON string.
-
-### `localStorage` storage
-
-On top of `JsonMemoryStorage`, mtcute implements `LocalstorageStorage`
-that persists that JSON string in browser's `localStorage`:
-
-```ts{4}
-import { LocalstorageStorage } from '@mcute/core'
-
-const tg = new TelegramClient({
-    storage: new LocalstorageStorage('mtcute:my-account')
-})
-```
-
-### JSON file storage
-
-For Node JS, there is an option to use JSON file based storage.
-mtcute implements that in `JsonFileStorage` class:
-
-```ts{4}
-import { JsonFileStorage } from '@mcute/core'
-
-const tg = new TelegramClient({
-    storage: new JsonFileStorage('my-account.json')
-})
-```
-
-::: warning
-JSON file based storage is **not recommended** because of numerous issues
-that are out of library's control. The idea itself is broken, not the
-implementation.
-
-Instead, prefer [SQLite](#sqlite-storage) storage.
-:::
-
 
 ## SQLite storage
 
@@ -104,10 +62,78 @@ WAL mode ([Learn more](https://github.com/JoshuaWise/better-sqlite3/blob/master/
 When using WAL, along with your SQLite file there will also
 be `-shm` and `-wal` files. If you don't like seeing those files,
 instead of disabling WAL altogether, consider putting your storage in a folder
-(i.e. `new SqliteStorage('storage/mtcute.db')`).
+(i.e. `new SqliteStorage('storage/my-account')`).
 
 If you are in fact having problems with WAL mode, you can disable it
 with `disableWal` parameter.
+
+
+## IndexedDB storage
+
+The preferred storage for a Web application is the one using IndexedDB,
+which is basically a browser's version of SQLite.
+
+```ts{4}
+import { IdbStorage } from '@mtcute/core/storage/idb.js'
+
+const tg = new BaseTelegramClient({
+    storage: new IdbStorage('my-account')
+})
+```
+
+::: tip
+If you are using `@mtcute/client`, IndexedDB storage is the default,
+and you can simply pass a string with file name instead
+of instantiating `IdbStorage` manually:
+
+```ts
+const tg = new TelegramClient({
+    storage: 'my-account'
+})
+```
+:::
+
+
+## JSON-based storage
+
+`MemoryStorage` internally uses a simple JavaScript object
+containing all the data that should be persisted.
+`JsonMemoryStorage` is a subclass that implements methods
+to import and export the current storage to/from JSON string.
+
+::: warning
+JSON based storages are **not recommended** because of numerous issues
+that are out of library's control, and also because they don't persist
+everything, only the most important data.
+
+Instead, prefer SQLite or IndexedDB storage.
+:::
+
+### `localStorage` storage
+
+On top of `JsonMemoryStorage`, mtcute implements `LocalstorageStorage`
+that persists that JSON string in browser's `localStorage`:
+
+```ts{4}
+import { LocalstorageStorage } from '@mcute/core'
+
+const tg = new TelegramClient({
+    storage: new LocalstorageStorage('mtcute:my-account')
+})
+```
+
+### JSON file storage
+
+For Node JS, there is an option to use JSON file based storage.
+mtcute implements that in `JsonFileStorage` class:
+
+```ts{4}
+import { JsonFileStorage } from '@mcute/core'
+
+const tg = new TelegramClient({
+    storage: new JsonFileStorage('my-account.json')
+})
+```
 
 ## Session strings
 

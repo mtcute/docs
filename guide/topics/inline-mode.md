@@ -32,7 +32,7 @@ const chat = await tg.resolvePeer('me')
 
 const results = await tg.call({
     _: 'messages.getInlineBotResults',
-    bot: normalizeToInputUser(await tg.resolvePeer('music'))!,
+    bot: toInputUser(await tg.resolvePeer('music'))!,
     peer: chat,
     query: 'vivaldi',
     offset: ''

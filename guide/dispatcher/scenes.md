@@ -7,7 +7,7 @@ updates will be redirected to the scene, and not processed as usual.
 This is particularly useful with FSM, since it allows users to
 enter independent "dialogues" with the bot.
 
-Full example: TODO LINK
+<!-- Full example: TODO LINK -->
 
 <p><small>* Only updates that can be <a href="./state#keying">keyed</a> are supported</small></p>
 
@@ -136,7 +136,8 @@ You can also return a `number` to jump to some step (ordering starts from 0).
 Additionally, wizard provides `onCurrentStep` filter that filters for updates that
 happened *after* the last triggered step.
 
-A simple example (full example TODO LINK):
+<!-- A simple example (full example TODO LINK): -->
+A simple example:
 
 ```ts
 interface RegForm {

@@ -4,7 +4,7 @@ Finite State Machine (**FSM** for short, or simply **State**) is a commonly used
 when developing bots that allows the bot to "remember" its state,
 which in turn makes the bot more interactive and user-friendly.
 
-Full code example with FSM: TODO LINK
+<!-- Full code example with FSM: TODO LINK -->
 
 ::: tip
 FSM is even more useful when used with [Scenes](scenes.html)

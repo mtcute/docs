@@ -3,8 +3,8 @@
 A conversation is an object that represents some chat and all messages
 inside it since the start of the conversation until it is stopped.
 
-This is particularly useful when programmatically interacting with bots,
-as you can see in this example TODO LINK
+<!-- This is particularly useful when programmatically interacting with bots,
+as you can see in this example TODO LINK -->
 
 ::: warning
 **DO NOT** use conversations to interact with users. Conversations are

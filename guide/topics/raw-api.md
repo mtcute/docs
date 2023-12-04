@@ -55,14 +55,14 @@ Learn more about pagination in [Telegram docs](https://core.telegram.org/api/off
 ## Resolving peers
 
 To fetch a value for fields that require `InputPeer`, use `resolvePeer` method.
-If you need `InputUser` or `InputChannel`, you can use `normalizeTo*` functions
+If you need `InputUser` or `InputChannel`, you can use `to*` functions
 respectively:
 
 ```ts
 const result = await tg.call({
     _: 'channels.reportSpam',
-    channel: normalizeToInputChannel(await tg.resolvePeer(...)),
-    userId: normalizeToInputUser(await tg.resolvePeer(...)),
+    channel: toInputChannel(await tg.resolvePeer(...)),
+    userId: toInputUser(await tg.resolvePeer(...)),
     id: [1, 2, 3]
 })
 ```
@@ -121,7 +121,7 @@ tg.network.handleUpdate(upd)
 Or, in case this PTS is related to a channel:
 
 ```ts
-const channel = normalizeToInputChannel(peer)
+const channel = toInputChannel(peer)
 const res = await this.call({
     _: 'channels.deleteMessages',
     channel,

@@ -76,8 +76,8 @@ tg.on('new_message', async (msg) => {
 `BaseTelegramClient` only dispatches raw [TL Updates](https://corefork.telegram.org/type/Updates), 
 and does not do any additional processing (like recovering gaps, ordering and parsing).
 
-If you want to make it do that, you can use `enableUpdatesProcessing` (TODO LINK) exported by `@mtcute/client`,
-and manually start updates look once the client is guaranteed to be logged in:
+If you want to make it do that, you can use [`enableUpdatesProcessing`](https://ref.mtcute.dev/functions/_mtcute_client.methods_updates.enableUpdatesProcessing.html)
+exported by `@mtcute/client`, and manually start updates loop once the client is guaranteed to be logged in:
 
 ```ts
 import { enableUpdatesProcessing, startUpdatesLoop } from '@mtcute/client/methods/updates/index.js'
@@ -98,7 +98,7 @@ However, the above code *does not* enable updates parsing.
 This means that `upd` will be a raw [TL Update](https://corefork.telegram.org/type/Update) 
 (nice naming, I know, don't blame me), which is guaranteed to be ordered properly however.
 
-To also parse the incoming updates, you can use `makeParsedUpdateHandler` (TODO LINK):
+To also parse the incoming updates, you can use [`makeParsedUpdateHandler`](https://ref.mtcute.dev/functions/_mtcute_client.methods_updates.makeParsedUpdateHandler.html):
 ```ts
 const tg = new BaseTelegramClient(...)
 enableUpdatesProcessing(tg, {

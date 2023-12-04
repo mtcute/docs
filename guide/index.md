@@ -30,7 +30,7 @@ pnpm add @mtcute/node
 3. Import the package and create a client:
 
 ```ts
-import { NodeTelegramClient } from '@mtcute/node'
+import { NodeTelegramClient, html } from '@mtcute/node'
 
 const tg = new NodeTelegramClient({
     apiId: API_ID,
@@ -40,7 +40,7 @@ const tg = new NodeTelegramClient({
 tg.run({ ... }, async (self) => {
     console.log(`Logged in as ${self.displayName}`)
 
-    await tg.sendText('self', 'Hello from <b>MTCute</b>!')
+    await tg.sendText('self', html`Hello from <b>MTCute</b>!`)
 })
 ```
 4. That's literally it! Happy hacking 🚀

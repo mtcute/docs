@@ -187,7 +187,7 @@ Writing, parsing and checking callback data manually gets tiring
 quite fast. Luckily, mtcute provides a tool that does the heavy stuff for you,
 called Callback data builder.
 
-Full example TODO LINK
+<!-- Full example TODO LINK -->
 
 ### Creating a builder
 

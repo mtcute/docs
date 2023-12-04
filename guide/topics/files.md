@@ -66,7 +66,7 @@ Sending media is incredibly easy with mtcute - you simply
 call `sendMedia` and provide `InputMediaLike`.
 
 `InputMediaLike` can be constructed manually, or using one of the
-builder functions exported in `InputMedia` namespace: TODO LINK
+builder functions exported in [`InputMedia` namespace](https://ref.mtcute.dev/modules/_mtcute_client.index.InputMedia.html):
 
 ```ts
 await tg.sendMedia('me', InputMedia.photo('file:assets/welcome.jpg'))
