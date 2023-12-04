@@ -46,14 +46,14 @@ To enter a scene or change current scene, use `state.enter` and pass the scene i
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.enter(SomeScene)
+  await state.enter(SomeScene)
 })
 ```
 
 You can also pass some initial state to the scene:
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.enter(SomeScene, { with: { foo: 'bar' } })
+  await state.enter(SomeScene, { with: { foo: 'bar' } })
 })
 ```
 
@@ -65,8 +65,8 @@ entered scene, use `PropagationAction.ToScene`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.enter(SomeScene)
-    return PropagationAction.ToScene
+  await state.enter(SomeScene)
+  return PropagationAction.ToScene
 })
 ```
 
@@ -76,7 +76,7 @@ To exit from the current scene, use `state.exit`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.exit()
+  await state.exit()
 })
 ```
 
@@ -94,10 +94,10 @@ This is possible with `getGlobalState`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    const local = await state.get()
+  const local = await state.get()
 
-    const globalState = await dp.getGlobalState<BotState>(msg)
-    const global = await globalState.get()
+  const globalState = await dp.getGlobalState<BotState>(msg)
+  const global = await globalState.get()
 })
 ```
 
@@ -141,46 +141,46 @@ A simple example:
 
 ```ts
 interface RegForm {
-    name?: string
+  name?: string
 }
 
 const wizard = WizardScene.for<RegForm>()
 
 wizard.addStep(async (msg) => {
-    await msg.answerText('What is your name?',  {
-        replyMarkup: BotKeyboard.inline([[BotKeyboard.callback('Skip', 'SKIP')]]),
-    })
+  await msg.answerText('What is your name?',  {
+    replyMarkup: BotKeyboard.inline([[BotKeyboard.callback('Skip', 'SKIP')]]),
+  })
 
-    return WizardSceneAction.Next
+  return WizardSceneAction.Next
 })
 
 wizard.onCallbackQuery(filters.and(wizard.onCurrentStep(), filters.equals('SKIP')), async (upd, state) => {
-    await state.merge({ name: 'Anonymous' })
-    await wizard.skip(state)
+  await state.merge({ name: 'Anonymous' })
+  await wizard.skip(state)
 
-    await upd.client.sendText(upd.chatId, 'Alright, "Anonymous" then\n\nNow enter your email')
+  await upd.client.sendText(upd.chatId, 'Alright, "Anonymous" then\n\nNow enter your email')
 })
 
 wizard.addStep(async (msg, state) => {
-    // simple validation
-    if (msg.text.length < 3) {
-        await msg.replyText('Invalid name!')
-        return WizardSceneAction.Stay
-    }
+  // simple validation
+  if (msg.text.length < 3) {
+    await msg.replyText('Invalid name!')
+    return WizardSceneAction.Stay
+  }
 
-    await state.set({ name: msg.text.trim() })
-    await msg.answerText('Enter your email')
+  await state.set({ name: msg.text.trim() })
+  await msg.answerText('Enter your email')
 
-    return WizardSceneAction.Next
+  return WizardSceneAction.Next
 })
 
 wizard.addStep(async (msg, state) => {
-    const { name } = (await state.get())!
+  const { name } = (await state.get())!
 
-    console.log({ name, email: msg.text })
+  console.log({ name, email: msg.text })
 
-    await msg.answerText('Thanks!')
-    return WizardSceneAction.Exit
+  await msg.answerText('Thanks!')
+  return WizardSceneAction.Exit
 })
 ```
 

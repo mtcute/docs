@@ -25,17 +25,17 @@ For example, consider the following code
 
 ```ts
 dp.onNewMessage(
-    filters.or(filters.text, filters.sticker),
-    async (msg) => {
-        console.log('Text or sticker')
-    }
+  filters.or(filters.text, filters.sticker),
+  async (msg) => {
+    console.log('Text or sticker')
+  }
 )
 
 dp.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    }
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  }
 )
 ```
 
@@ -47,11 +47,11 @@ register it to a different group:
 
 ```ts
 dp.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    },
-    1
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  },
+  1
 )
 ```
 
@@ -61,11 +61,11 @@ handler execute *before* the first one:
 
 ```ts
 dp.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    },
-    -1
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  },
+  -1
 )
 ```
 
@@ -89,20 +89,20 @@ within the same dispatcher, you can use `PropagationAction.Stop`:
 import { PropagationAction } from '@mtcute/dispatcher'
 
 dp.onNewMessage(
-    filters.or(filters.text, filters.sticker),
-    async (msg) => {
-        console.log('Text or sticker')
+  filters.or(filters.text, filters.sticker),
+  async (msg) => {
+    console.log('Text or sticker')
 
-        return PropagationAction.Stop
-    }
+    return PropagationAction.Stop
+  }
 )
 
 dp.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    },
-    1
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  },
+  1
 )
 ```
 
@@ -124,22 +124,22 @@ prevents the handlers from child dispatchers to be executed:
 import { PropagationAction } from '@mtcute/dispatcher'
 
 dp.onNewMessage(
-    filters.or(filters.text, filters.sticker),
-    async (msg) => {
-        console.log('Text or sticker')
+  filters.or(filters.text, filters.sticker),
+  async (msg) => {
+    console.log('Text or sticker')
 
-        return PropagationAction.StopChidlren
-    }
+    return PropagationAction.StopChidlren
+  }
 )
 
 const dp1 = new Dispatcher()
 dp.addChild(dp1)
 
 dp1.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    }
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  }
 )
 ```
 
@@ -156,19 +156,19 @@ the same group even though some handler from that group was already executed:
 import { PropagationAction } from '@mtcute/dispatcher'
 
 dp.onNewMessage(
-    filters.or(filters.text, filters.sticker),
-    async (msg) => {
-        console.log('Text or sticker')
+  filters.or(filters.text, filters.sticker),
+  async (msg) => {
+    console.log('Text or sticker')
 
-        return PropagationAction.Continue
-    }
+    return PropagationAction.Continue
+  }
 )
 
 dp.onNewMessage(
-    filters.text,
-    async (msg) => {
-        console.log('Text only')
-    }
+  filters.text,
+  async (msg) => {
+    console.log('Text only')
+  }
 )
 ```
 
@@ -187,11 +187,11 @@ despite returning `Stop` action:
 
 ```ts
 dp.onNewMessage(() => {
-    return PropagationAction.Stop
+  return PropagationAction.Stop
 })
 
 dp.onRawUpdate(
-    (cl, upd) => upd._ === 'updateNewMessage',
-    () => { ... }
+  (cl, upd) => upd._ === 'updateNewMessage',
+  () => { ... }
 )
 ```

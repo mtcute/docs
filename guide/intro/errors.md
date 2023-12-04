@@ -21,11 +21,11 @@ of errors, so you will need to write a bit of boilerplate:
 import { tl } from '@mtcute/node'
 
 try {
-    // your code //
+  // your code //
 } catch (e) {
-    if (tl.RpcError.is(e, 'FLOOD_WAIT_%d')) {
-        // handle...
-    } else throw e
+  if (tl.RpcError.is(e, 'FLOOD_WAIT_%d')) {
+    // handle...
+  } else throw e
 }
 ```
 
@@ -50,8 +50,8 @@ To enable, pass `enableErrorReporting: true` to the client options:
 
 ```ts
 const tg = new TelegramClient({
-    ...
-    enableErrorReporting: true
+  ...
+  enableErrorReporting: true
 })
 ```
 
@@ -63,11 +63,11 @@ after checking for error type using `.is()`:
 
 ```ts
 try {
-    // your code //
+  // your code //
 } catch (e) {
-    if (tl.RpcError.is(e, 'FLOOD_WAIT_%d')) {
-        await new Promise((res) => setTimeout(res, e.seconds))
-    } else throw e
+  if (tl.RpcError.is(e, 'FLOOD_WAIT_%d')) {
+    await new Promise((res) => setTimeout(res, e.seconds))
+  } else throw e
 }
 ```
 
@@ -107,14 +107,14 @@ You can handle these errors using `TelegramClient#onError`:
 const tg = new TelegramClient(...)
 
 tg.onError((err, conn) => {
-    if (conn) {
-        // `err` is the error
-        // `conn` is the connection where the error happened
-        console.log(err, conn)
-    }
+  if (conn) {
+    // `err` is the error
+    // `conn` is the connection where the error happened
+    console.log(err, conn)
+  }
 
-    // `err` is not a connection-related error
-    console.log(err)
+  // `err` is not a connection-related error
+  console.log(err)
 })
 ```
 
@@ -136,10 +136,10 @@ can be handled as well:
 const dp = new Dispatcher()
 
 dp.onError((error, update, state) => {
-    console.log(error)
+  console.log(error)
 
-    // to indicate that the error was handled
-    return true
+  // to indicate that the error was handled
+  return true
 })
 ```
 

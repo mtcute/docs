@@ -18,7 +18,7 @@ To handle inline queries to your bot, simply use `onInlineQuery`:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    // ...
+  // ...
 })
 ```
 
@@ -26,10 +26,10 @@ You can also use `filters.regex` to filter based on the query text:
 
 ```ts
 dp.onInlineQuery(
-    filters.regex(/^cats /),
-    async (query) => {
-        // ...
-    }
+  filters.regex(/^cats /),
+  async (query) => {
+    // ...
+  }
 )
 ```
 
@@ -45,7 +45,7 @@ contains [results](#results):
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([...])
+  query.answer([...])
 })
 ```
 
@@ -84,17 +84,17 @@ a thumbnail and a URL:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.article(
-            'RESULT_ID',
-            {
-                title: 'Article title',
-                description: 'Article description',
-                thumb: 'https://example.com/image.jpg',
-                url: 'https://example.com/some-article.html'
-            }
-        )
-    ])
+  query.answer([
+    BotInline.article(
+      'RESULT_ID',
+      {
+        title: 'Article title',
+        description: 'Article description',
+        thumb: 'https://example.com/image.jpg',
+        url: 'https://example.com/some-article.html'
+      }
+    )
+  ])
 })
 ```
 
@@ -128,12 +128,12 @@ as a result.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.gif(
-            'RESULT_ID',
-            'https://media.tenor.com/videos/98bf1db10cb172aae086b09ae88ebf22/mp4'
-        )
-    ])
+  query.answer([
+    BotInline.gif(
+      'RESULT_ID',
+      'https://media.tenor.com/videos/98bf1db10cb172aae086b09ae88ebf22/mp4'
+    )
+  ])
 })
 ```
 
@@ -148,16 +148,16 @@ You can also add title and description, however only some clients display them
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.gif(
-            'RESULT_ID',
-            'https://media.tenor.com/videos/98bf1db10cb172aae086b09ae88ebf22/mp4',
-            {
-                title: 'GIF title',
-                description: 'GIF description',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.gif(
+      'RESULT_ID',
+      'https://media.tenor.com/videos/98bf1db10cb172aae086b09ae88ebf22/mp4',
+      {
+          title: 'GIF title',
+          description: 'GIF description',
+      }
+    )
+  ])
 })
 ```
 
@@ -177,18 +177,18 @@ overridden by Telegram-generated video thumbnail.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.video(
-            'RESULT_ID',
-            'https://amvnews.ru/index.php?go=Files&file=down&id=1858&alt=4',
-            {
-                thumb:
-                    'https://amvnews.ru/images/news098/1257019986-Bad-Apple21_5.jpg',
-                title: 'Video title',
-                description: 'Video description',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.video(
+      'RESULT_ID',
+      'https://amvnews.ru/index.php?go=Files&file=down&id=1858&alt=4',
+      {
+        thumb:
+          'https://amvnews.ru/images/news098/1257019986-Bad-Apple21_5.jpg',
+        title: 'Video title',
+        description: 'Video description',
+      }
+    )
+  ])
 })
 ```
 
@@ -202,18 +202,18 @@ Alternatively, you can send a video by its URL (e.g. from YouTube) using
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.video(
-            'RESULT_ID',
-            'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-            {
-                isEmbed: true,
-                thumb: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-                title: 'Video title',
-                description: 'Video description',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.video(
+      'RESULT_ID',
+      'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      {
+        isEmbed: true,
+        thumb: 'https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+        title: 'Video title',
+        description: 'Video description',
+      }
+    )
+  ])
 })
 ```
 
@@ -234,16 +234,16 @@ When sending by direct URL, there's a file size limit of 20 MB.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.audio(
-            'RESULT_ID',
-            'https://vk.com/mp3/cc_ice_melts.mp3',
-            {
-                performer: 'Griby',
-                title: 'Tayet Lyod',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.audio(
+      'RESULT_ID',
+      'https://vk.com/mp3/cc_ice_melts.mp3',
+      {
+        performer: 'Griby',
+        title: 'Tayet Lyod',
+      }
+    )
+  ])
 })
 ```
 
@@ -269,15 +269,15 @@ so if it is not generated, try re-encoding your file with OPUS.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.voice(
-            'RESULT_ID',
-            'https://tei.su/test_voice.ogg',
-            {
-                title: 'Voice title',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.voice(
+      'RESULT_ID',
+      'https://tei.su/test_voice.ogg',
+      {
+        title: 'Voice title',
+      }
+    )
+  ])
 })
 ```
 
@@ -292,12 +292,12 @@ You can send an image as an inline result.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg'
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg'
+    )
+  ])
 })
 ```
 
@@ -312,16 +312,16 @@ You can also add title and description, however only some clients display them
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                title: 'Photo title',
-                description: 'Photo description',
-            }
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        title: 'Photo title',
+        description: 'Photo description',
+      }
+    )
+  ])
 })
 ```
 
@@ -338,12 +338,12 @@ only by File ID.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.sticker(
-            'RESULT_ID',
-            'CAACAgIAAxk...JtzysqiUK3IAQ'
-        )
-    ])
+  query.answer([
+    BotInline.sticker(
+      'RESULT_ID',
+      'CAACAgIAAxk...JtzysqiUK3IAQ'
+    )
+  ])
 })
 ```
 
@@ -363,17 +363,17 @@ With File IDs, you can send any file.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.file(
-            'RESULT_ID',
-            'https://file-examples-com.github.io/uploads/2017/10/file-sample_150kB.pdf',
-            {
-                mime: 'application/pdf',
-                title: 'File title',
-                description: 'File description'
-            }
-        )
-    ])
+  query.answer([
+    BotInline.file(
+      'RESULT_ID',
+      'https://file-examples-com.github.io/uploads/2017/10/file-sample_150kB.pdf',
+      {
+        mime: 'application/pdf',
+        title: 'File title',
+        description: 'File description'
+      }
+    )
+  ])
 })
 ```
 
@@ -391,16 +391,16 @@ location provided.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.geo(
-            'RESULT_ID',
-            {
-                latitude: 55.751999,
-                longitude: 37.617734,
-                title: 'Kremlin'
-            }
-        ),
-    ])
+  query.answer([
+    BotInline.geo(
+      'RESULT_ID',
+      {
+        latitude: 55.751999,
+        longitude: 37.617734,
+        title: 'Kremlin'
+      }
+    ),
+  ])
 })
 ```
 
@@ -418,17 +418,17 @@ location provided.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.venue(
-            'RESULT_ID',
-            {
-                latitude: 55.751999,
-                longitude: 37.617734,
-                title: 'Kremlin',
-                address: 'Red Square'
-            }
-        ),
-    ])
+  query.answer([
+    BotInline.venue(
+      'RESULT_ID',
+      {
+        latitude: 55.751999,
+        longitude: 37.617734,
+        title: 'Kremlin',
+        address: 'Red Square'
+      }
+    ),
+  ])
 })
 ```
 
@@ -443,16 +443,16 @@ You can send a contact as an inline result.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.contact(
-            'RESULT_ID',
-            {
-                firstName: 'Alisa',
-                phone: '+79001234567',
-                thumb: 'https://avatars.githubusercontent.com/u/86301490'
-            }
-        ),
-    ])
+  query.answer([
+    BotInline.contact(
+      'RESULT_ID',
+      {
+        firstName: 'Alice',
+        phone: '+79001234567',
+        thumb: 'https://avatars.githubusercontent.com/u/86301490'
+      }
+    ),
+  ])
 })
 ```
 
@@ -467,9 +467,9 @@ Finally, you can send a game as an inline result.
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.game('RESULT_ID', 'game_short_name'),
-    ])
+  query.answer([
+    BotInline.game('RESULT_ID', 'game_short_name'),
+  ])
 })
 ```
 
@@ -486,17 +486,17 @@ text message:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                message: BotInlineMessage.text(
-                    'Ha-ha, just kidding. No Renge for you :p'
-                )
-            }
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        message: BotInlineMessage.text(
+          'Ha-ha, just kidding. No Renge for you :p'
         )
-    ])
+      }
+    )
+  ])
 })
 ```
 
@@ -507,15 +507,15 @@ with custom caption, keyboard, etc:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                message: BotInlineMessage.media({ text: 'Nyanpasu!' }),
-            }
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        message: BotInlineMessage.media({ text: 'Nyanpasu!' }),
+      }
+    )
+  ])
 })
 ```
 
@@ -530,19 +530,19 @@ or even live geolocation:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                // or BotInlineMessage.geoLive
-                message: BotInlineMessage.geo({
-                    latitude: 55.751999,
-                    longitude: 37.617734,
-                }),
-            }
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        // or BotInlineMessage.geoLive
+        message: BotInlineMessage.geo({
+          latitude: 55.751999,
+          longitude: 37.617734,
+        }),
+      }
+    )
+  ])
 })
 ```
 
@@ -552,20 +552,20 @@ Instead of sending the default message, you can send a venue
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                message: BotInlineMessage.venue({
-                    latitude: 55.751999,
-                    longitude: 37.617734,
-                    title: 'Kremlin',
-                    address: 'Red Square'
-                }),
-            }
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        message: BotInlineMessage.venue({
+          latitude: 55.751999,
+          longitude: 37.617734,
+          title: 'Kremlin',
+          address: 'Red Square'
+        }),
+      }
+    )
+  ])
 })
 ```
 
@@ -575,18 +575,18 @@ Instead of sending the default message, you can send a contact
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.photo(
-            'RESULT_ID',
-            'https://nyanpa.su/renge.jpg',
-            {
-                message: BotInlineMessage.contact({
-                    firstName: 'Alisa',
-                    phone: '+79001234567',
-                }),
-            }
-        )
-    ])
+  query.answer([
+    BotInline.photo(
+      'RESULT_ID',
+      'https://nyanpa.su/renge.jpg',
+      {
+        message: BotInlineMessage.contact({
+          firstName: 'Alice',
+          phone: '+79001234567',
+        }),
+      }
+    )
+  ])
 })
 ```
 
@@ -597,13 +597,13 @@ under the message ([learn more](../topics/keyboards.html)):
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([
-        BotInline.game('RESULT_ID', 'test', {
-            message: BotInlineMessage.game({
-                replyMarkup: ...
-            })
-        }),
-    ])
+  query.answer([
+    BotInline.game('RESULT_ID', 'test', {
+      message: BotInlineMessage.game({
+        replyMarkup: ...
+      })
+    }),
+  ])
 })
 ```
 
@@ -620,12 +620,12 @@ For that, you can use `switchPm` button along with your results:
 
 ```ts
 dp.onInlineQuery(async (query) => {
-    query.answer([], {
-        switchPm: {
-            text: 'Log in',
-            parameter: 'login_inline'
-        }
-    })
+  query.answer([], {
+    switchPm: {
+      text: 'Log in',
+      parameter: 'login_inline'
+    }
+  })
 })
 
 dp.onNewMessage(filters.deeplink('login_inline'), async (msg) => {
@@ -641,9 +641,9 @@ which can be handled:
 
 ```ts
 dp.onChosenInlineResult(async (result) => {
-    await result.editMessage({
-        text: `${result.user.displayName}, thanks for using inline!`
-    })
+  await result.editMessage({
+    text: `${result.user.displayName}, thanks for using inline!`
+  })
 })
 ```
 
@@ -651,10 +651,10 @@ You can use `filters.regex` to filter by chosen result ID:
 
 ```ts
 dp.onChosenInlineResult(
-    filters.regex(/^CATS_/),
-    async (result) => {
-        // ...
-    }
+  filters.regex(/^CATS_/),
+  async (result) => {
+    // ...
+  }
 )
 ```
 
@@ -681,11 +681,11 @@ originates from an inline message.
 
 ```ts
 dp.onChosenInlineResult(async (result) => {
-    await result.editMessage({...})
+  await result.editMessage({...})
 })
 
 dp.onCallbackQuery(async (query) => {
-    await query.editMessage({...})
+  await query.editMessage({...})
 })
 ```
 
@@ -693,18 +693,18 @@ You can also save inline message ID and edit the message later:
 
 ```ts
 function updateMessageLater(msgId: string) {
-    setTimeout(() => {
-        tg.editInlineMessage(msgId, {...})
-            .catch(console.error)
-    }, 5000)
+  setTimeout(() => {
+    tg.editInlineMessage(msgId, {...})
+      .catch(console.error)
+  }, 5000)
 }
 
 dp.onChosenInlineResult(async (result) => {
-    updateMessageLater(result.messageIdStr)
+  updateMessageLater(result.messageIdStr)
 })
 
 dp.onCallbackQuery(async (query) => {
-    updateMessageLater(query.inlineMessageIdStr)
+  updateMessageLater(query.inlineMessageIdStr)
 })
 ```
 
@@ -722,10 +722,10 @@ directly to them (unlike Bot API):
 
 ```ts
 dp.onChosenInlineResult(async (result) => {
-    const link = await getDownloadLink(result.id)
+  const link = await getDownloadLink(result.id)
 
-    await result.editMessage({
-        media: InputMedia.audio(await fetch(link))
-    })
+  await result.editMessage({
+    media: InputMedia.audio(await fetch(link))
+  })
 })
 ```

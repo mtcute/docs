@@ -23,7 +23,7 @@ dispatched:
 
 ```ts
 dp.onNewMessage(async (upd) => {
-    await upd.answerText('Hey!')
+  await upd.answerText('Hey!')
 })
 ```
 
@@ -34,7 +34,7 @@ Whenever a message is edited (and client receives an update about that*),
 
 ```ts
 dp.onEditMessage(async (upd) => {
-    await upd.replyText('Yes.')
+  await upd.replyText('Yes.')
 })
 ```
 
@@ -48,7 +48,7 @@ When message grouping is enabled (see [here](/guide/intro/updates.md#message-gro
 
 ```ts
 dp.onMessageGroup(async (upd) => {
-    await upd.replyText('Thanks for the media!')
+  await upd.replyText('Thanks for the media!')
 })
 ```
 
@@ -61,9 +61,9 @@ to check what that ID corresponds to.
 
 ```ts
 dp.onDeleteMessage(async (upd) => {
-    if (upd.messageIds.includes(42)) {
-        console.log('Magic message deleted :c')
-    }
+  if (upd.messageIds.includes(42)) {
+    console.log('Magic message deleted :c')
+  }
 })
 ```
 
@@ -81,7 +81,7 @@ is an administrator, `chat_member` handlers are dispatched.
 
 ```ts
 dp.onChatMemberUpdate(async (upd) => {
-    console.log(`${upd.user.displayName} ${upd.type} by ${upd.actor.displayName}`)
+  console.log(`${upd.user.displayName} ${upd.type} by ${upd.actor.displayName}`)
 })
 ```
 
@@ -90,10 +90,10 @@ You can filter by update type using `filters.chatMember`:
 
 ```ts
 dp.onChatMemberUpdate(
-    filters.chatMember('joined'),
-    async (upd) => {
-        await upd.client.sendText(upd.chat, `${upd.user.mention()}, welcome to the chat!`)
-    }
+  filters.chatMember('joined'),
+  async (upd) => {
+    await upd.client.sendText(upd.chat, `${upd.user.mention()}, welcome to the chat!`)
+  }
 )
 ```
 :::
@@ -105,12 +105,12 @@ handlers are dispatched:
 
 ```ts
 dp.onInlineQuery(async (upd) => {
-    await upd.answer([], {
-        switchPm: {
-            text: 'Hello!',
-            parameter: 'inline_hello'
-        }
-    })
+  await upd.answer([], {
+    switchPm: {
+      text: 'Hello!',
+      parameter: 'inline_hello'
+    }
+  })
 })
 ```
 
@@ -124,9 +124,9 @@ are dispatched:
 
 ```ts
 dp.onChosenInlineResult(async (upd) => {
-    await upd.editMessage({
-        text: `${result.user.displayName}, thanks for using inline!`
-    })
+  await upd.editMessage({
+    text: `${result.user.displayName}, thanks for using inline!`
+  })
 })
 ```
 
@@ -146,7 +146,7 @@ Whenever user clicks on a [callback button](../topics/keyboards.html#inline-keyb
 
 ```ts
 dp.onCallbackQuery(async (upd) => {
-    await upd.answer({ text: '🌸' })
+  await upd.answer({ text: '🌸' })
 })
 ```
 
@@ -157,7 +157,7 @@ Whenever a poll state is updated (stopped, anonymous user has voted, etc.),
 
 ```ts
 dp.onPollUpdate(async (upd) => {
-    // do something
+  // do something
 })
 ```
 
@@ -180,7 +180,7 @@ When a user votes in a public poll, `poll_vote` handlers are dispatched:
 
 ```ts
 dp.onPollVote(async (upd) => {
-    upd.user.sendText('Thanks for voting!')
+  upd.user.sendText('Thanks for voting!')
 })
 ```
 
@@ -199,7 +199,7 @@ and client receives an update about that*,
 
 ```ts
 dp.onUserStatusUpdate(async (upd) => {
-    console.log(`User ${upd.userId} is now ${upd.status}`)
+  console.log(`User ${upd.userId} is now ${upd.status}`)
 })
 ```
 
@@ -216,7 +216,7 @@ and client receives an update about that*,
 
 ```ts
 dp.onUserTyping(async (upd) => {
-    console.log(`${upd.userId} is ${upd.status} in ${upd.chatId}`)
+  console.log(`${upd.userId} is ${upd.status} in ${upd.chatId}`)
 })
 ```
 
@@ -231,7 +231,7 @@ and client receives an update about that, `history_read` handlers are dispatched
 
 ```ts
 dp.onHistoryRead(async (upd) => {
-    console.log(`History read in ${upd.chatId} up to ${upd.maxReadId}`)
+  console.log(`History read in ${upd.chatId} up to ${upd.maxReadId}`)
 })
 ```
 
@@ -242,7 +242,7 @@ When a user clicks "Stop bot" button in the bot's profile,
 
 ```ts
 dp.onBotStopped(async (upd) => {
-    console.log(`Bot stopped by ${upd.user.id}`)
+  console.log(`Bot stopped by ${upd.user.id}`)
 })
 ```
 
@@ -257,11 +257,11 @@ When a user requests to join a group/channel where the current bot is an admin,
 
 ```ts
 dp.onBotChatJoinRequest(async (upd) => {
-    console.log(`User ${upd.user.id} wants to join ${upd.chat.id}`)
+  console.log(`User ${upd.user.id} wants to join ${upd.chat.id}`)
 
-    if (upd.user.id === DUROV) {
-        await upd.decline()
-    }
+  if (upd.user.id === DUROV) {
+    await upd.decline()
+  }
 })
 ```
 
@@ -272,7 +272,7 @@ When a user requests to join a group/channel where the current user is an admin,
 
 ```ts
 dp.onChatJoinRequest(async (upd) => {
-    console.log(`User ${upd.recentRequesters[0].id} wants to join ${upd.chatId}`)
+  console.log(`User ${upd.recentRequesters[0].id} wants to join ${upd.chatId}`)
 })
 ```
 
@@ -285,7 +285,7 @@ When a user clicks "Pay" button, `pre_checkout_query` handlers are dispatched:
 
 ```ts
 dp.onPreCheckoutQuery(async (upd) => {
-    await upd.approve()
+  await upd.approve()
 })
 ```
 
@@ -295,7 +295,7 @@ When a story is posted or modified, `story` handlers are dispatched:
 
 ```ts
 dp.onStoryUpdate(async (upd) => {
-    console.log(`${upd.peer.id} posted or modified a story!`)
+  console.log(`${upd.peer.id} posted or modified a story!`)
 })
 ```
 
@@ -305,7 +305,7 @@ When a story is deleted, `delete_story` handlers are dispatched:
 
 ```ts
 dp.onDeleteStory(async (upd) => {
-    console.log(`${upd.peer.id} deleted story ${upd.storyId}!`)
+  console.log(`${upd.peer.id} deleted story ${upd.storyId}!`)
 })
 ```
 
@@ -316,15 +316,15 @@ but you can still add a handler for a custom MTProto update:
 
 ```ts
 dp.onRawUpdate(
-    (cl, upd) => upd._ === 'updateUserName',
-    async (
-        client: TelegramClient,
-        update_: tl.TypeUpdate,
-        peers: PeersIndex,
-    ) => {
-        const update = update_ as tl.RawUpdateUserName
-        // ...
-    }
+  (cl, upd) => upd._ === 'updateUserName',
+  async (
+    client: TelegramClient,
+    update_: tl.TypeUpdate,
+    peers: PeersIndex,
+  ) => {
+    const update = update_ as tl.RawUpdateUserName
+    // ...
+  }
 )
 ```
 
@@ -347,11 +347,11 @@ which checks if the update should be handled by this handler
 
 ```ts
 dp.addUpdateHandler({
-    type: 'new_message',
-    callback: async (msg) => {
-        ...
-    },
-    check: filters.media
+  type: 'new_message',
+  callback: async (msg) => {
+    ...
+  },
+  check: filters.media
 })
 ```
 

@@ -66,7 +66,7 @@ this code (it doesn't even require authorization):
 
 ```ts
 tg.call({ _: 'help.getConfig' })
-    .then((res) => console.log(res.dcOptions))
+  .then((res) => console.log(res.dcOptions))
 ```
 
 ## How to migrate an account?

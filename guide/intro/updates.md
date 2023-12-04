@@ -15,8 +15,8 @@ Then, just disable them in `TelegramClient` parameters:
 
 ```ts
 const tg = new TelegramClient({
-    // ...
-    disableUpdates: true
+  // ...
+  disableUpdates: true
 })
 ```
 
@@ -29,30 +29,30 @@ The parameters themselves will be explained a bit below, for now let's just focu
 
 ```ts
 const tg = new TelegramClient({
-    // ...
-    updates: {
-        messageGroupingInterval: 250,
-        catchUp: true
-    }
+  // ...
+  updates: {
+    messageGroupingInterval: 250,
+    catchUp: true
+  }
 })
 ```
 
 The updates themselves are dispatched on the client itself as events (see [reference](https://ref.mtcute.dev/classes/_mtcute_client.index.TelegramClient.html#on)):
 ```ts
 tg.on('new_message', (msg) => {
-    console.log(msg.text)
+  console.log(msg.text)
 })
 
 // You can also handle any supported update at once:
 tg.on('update', (upd) => {
-    if (upd.name === 'new_message') {
-        console.log(upd.data.text)
-    }
+  if (upd.name === 'new_message') {
+    console.log(upd.data.text)
+  }
 })
 
 // As well as raw MTProto updates:
 tg.on('raw_update', (upd, users, chats) => {
-    console.log(upd._)
+  console.log(upd._)
 })
 ```
 
@@ -62,11 +62,11 @@ so if you want to do something async, make sure to also handle the errors:
 
 ```ts
 tg.on('new_message', async (msg) => {
-    try {
-        await msg.answerText('test')
-    } catch (e) {
-        console.error(e)
-    }
+  try {
+    await msg.answerText('test')
+  } catch (e) {
+    console.error(e)
+  }
 })
 ```
 :::
@@ -84,8 +84,8 @@ import { enableUpdatesProcessing, startUpdatesLoop } from '@mtcute/client/method
 
 const tg = new BaseTelegramClient(...)
 enableUpdatesProcessing(tg, {
-    catchUp: true,
-    onUpdate: (upd, peers) => console.log(upd, peers)
+  catchUp: true,
+  onUpdate: (upd, peers) => console.log(upd, peers)
 })
 
 // later
@@ -102,10 +102,10 @@ To also parse the incoming updates, you can use [`makeParsedUpdateHandler`](http
 ```ts
 const tg = new BaseTelegramClient(...)
 enableUpdatesProcessing(tg, {
-    catchUp: true,
-    onUpdate: makeParsedUpdateHandler({
-        onUpdate: (upd) => console.log(upd),
-    }),
+  catchUp: true,
+  onUpdate: makeParsedUpdateHandler({
+    onUpdate: (upd) => console.log(upd),
+  }),
 })
 ```
 
@@ -164,7 +164,7 @@ const tg = new NodeTelegramClient(...)
 const dp = new Dispatcher(tg)
 
 dp.onNewMessage(async (msg) => {
-    await msg.forwardTo('me')
+  await msg.forwardTo('me')
 })
 
 tg.run()
@@ -184,10 +184,10 @@ Let's make our code only handle messages containing media:
 import { filters } from '@mtcute/node'
 
 dp.onNewMessage(
-    filters.media,
-    async (msg) => {
-        await msg.forwardTo('me')
-    }
+  filters.media,
+  async (msg) => {
+    await msg.forwardTo('me')
+  }
 )
 ```
 

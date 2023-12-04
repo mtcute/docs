@@ -15,20 +15,20 @@ that issued the update (i.e. message sender, poll voter, etc.):
 
 ```ts
 dp.onNewMessage(
-    filters.userId(12345678),
-    async (msg) => {
-        // ...
-    }
+  filters.userId(12345678),
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
 There's also `filters.chatId` that checks for the chat ID instead:
 ```ts
 dp.onNewMessage(
-    filters.chatId(-100123456789),
-    async (msg) => {
-        // ...
-    }
+  filters.chatId(-100123456789),
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
@@ -36,10 +36,10 @@ dp.onNewMessage(
 
 ```ts
 dp.onNewMessage(
-    filters.chat('private'),
-    async (msg) => {
-        // ...
-    }
+  filters.chat('private'),
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
@@ -48,10 +48,10 @@ For every media type, there's a filter that will only match that media type:
 
 ```ts
 dp.onNewMessage(
-    filters.photo,
-    async (msg) => {
-        await msg.replyText('Great photo though')
-    }
+  filters.photo,
+  async (msg) => {
+    await msg.replyText('Great photo though')
+  }
 )
 ```
 
@@ -60,10 +60,10 @@ service message action type(s):
 
 ```ts
 dp.onNewMessage(
-    filters.action('chat_created'),
-    async (msg) => {
-        await msg.answerText(`${msg.user.mention()} created ${msg.action.title}`)
-    }
+  filters.action('chat_created'),
+  async (msg) => {
+    await msg.answerText(`${msg.user.mention()} created ${msg.action.title}`)
+  }
 )
 ```
 
@@ -72,12 +72,12 @@ about the match into the update object:
 
 ```ts
 dp.onNewMessage(
-    filters.command('start'),
-    async (msg) => {
-        if (msg.command[1] === 'from_inline') {
-            await msg.answerText('Thanks for using inline mode!')
-        }
+  filters.command('start'),
+  async (msg) => {
+    if (msg.command[1] === 'from_inline') {
+      await msg.answerText('Thanks for using inline mode!')
     }
+  }
 )
 
 dp.onNewMessage(
@@ -93,10 +93,10 @@ change type:
 
 ```ts
 dp.onChatMemberUpdate(
-    filters.chatMember('joined'),
-    async (upd: ChatMemberUpdate) => {
-        await upd.chat.sendText(`${upd.user.mention()}, welcome to the chat!`)
-    }
+  filters.chatMember('joined'),
+  async (upd: ChatMemberUpdate) => {
+    await upd.chat.sendText(`${upd.user.mention()}, welcome to the chat!`)
+  }
 )
 ```
 
@@ -105,13 +105,13 @@ were issued by the current user:
 
 ```ts
 dp.onChatMemberUpdate(
-    filters.and(
-        filters.chatMemberSelf,
-        filters.chatMember('joined'),
-    ),
-    async (upd: ChatMemberUpdate) => {
-        await addChatToDatabase(upd.chat)
-    }
+  filters.and(
+    filters.chatMemberSelf,
+    filters.chatMember('joined'),
+  ),
+  async (upd: ChatMemberUpdate) => {
+    await addChatToDatabase(upd.chat)
+  }
 )
 ```
 
@@ -125,23 +125,23 @@ This is true for most of the built-in filters:
 
 ```ts
 dp.onNewMessage(
-    async (msg) => {
-        // msg.media is Photo | Video | ... | null
-    }
+  async (msg) => {
+    // msg.media is Photo | Video | ... | null
+  }
 )
 
 dp.onNewMessage(
-    filters.media,
-    async (msg) => {
-        // msg.media is Photo | Video | ...
-    }
+  filters.media,
+  async (msg) => {
+    // msg.media is Photo | Video | ...
+  }
 )
 
 dp.onNewMessage(
-    filters.photo,
-    async (msg) => {
-        // msg.media is Photo
-    }
+  filters.photo,
+  async (msg) => {
+    // msg.media is Photo
+  }
 )
 ```
 
@@ -158,17 +158,17 @@ To negate a filter, use `filters.not`:
 
 ```ts
 dp.onNewMessage(
-    filters.photo,
-    async (msg) => {
-        // msg.media is Photo
-    }
+  filters.photo,
+  async (msg) => {
+    // msg.media is Photo
+  }
 )
 
 dp.onNewMessage(
-    filters.not(filters.photo),
-    async (msg) => {
-        // msg.media is Exclude<MessageMedia, Photo>
-    }
+  filters.not(filters.photo),
+  async (msg) => {
+    // msg.media is Exclude<MessageMedia, Photo>
+  }
 )
 ```
 
@@ -178,10 +178,10 @@ Logical addition (i.e. OR operator) is supported with `filters.or`
 
 ```ts
 dp.onNewMessage(
-    filters.or(filters.video, filters.photo),
-    async (msg) => {
-        // msg.media is Photo | Video
-    }
+  filters.or(filters.video, filters.photo),
+  async (msg) => {
+    // msg.media is Photo | Video
+  }
 )
 ```
 
@@ -191,10 +191,10 @@ Logical multiplication (i.e. AND operator) is supported with `filters.and`.
 
 ```ts
 dp.onNewMessage(
-    filters.and(filters.chat('private'), filters.photo),
-    async (msg) => {
-        // msg.media is Photo
-    }
+  filters.and(filters.chat('private'), filters.photo),
+  async (msg) => {
+    // msg.media is Photo
+  }
 )
 ```
 
@@ -209,10 +209,10 @@ Under the hood, filters are simply functions, so you can do the following:
 
 ```ts
 dp.onNewMessage(
-    (msg) => msg.sender.isVerified,
-    async (msg) => {
-        // ...
-    }
+  (msg) => msg.sender.isVerified,
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
@@ -220,10 +220,10 @@ It can even be asynchronous:
 
 ```ts
 dp.onNewMessage(
-    async (msg) => await shouldProcessMessage(msg.id),
-    async (msg) => {
-        // ...
-    }
+  async (msg) => await shouldProcessMessage(msg.id),
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
@@ -234,17 +234,17 @@ that returns a filter:
 
 ```ts
 const usernameRegex = (regex: RegExp): UpdateFilter<Message> =>
-    (msg) => {
-        const m = msg.sender.username?.match(regex)
+  (msg) => {
+    const m = msg.sender.username?.match(regex)
 
-        return !!m
-    }
+    return !!m
+  }
 
 dp.onNewMessage(
-    usernameRegex(/some_regex/),
-    async (msg) => {
-        // ...
-    }
+  usernameRegex(/some_regex/),
+  async (msg) => {
+    // ...
+  }
 )
 ```
 
@@ -254,13 +254,13 @@ You can also add type modification to your custom filter:
 
 ```ts
 const fromChat: UpdateFilter<Message, { sender: Chat }> =
-    (msg) => msg.sender.type === 'chat'
+  (msg) => msg.sender.type === 'chat'
 
 dp.onNewMessage(
-    fromChat,
-    async (msg) => {
-        // msg.sender is Chat
-    }
+  fromChat,
+  async (msg) => {
+    // msg.sender is Chat
+  }
 )
 ```
 
@@ -277,25 +277,23 @@ to add the result of the parametrized filter:
 
 ```ts
 const usernameRegex = (regex: RegExp): UpdateFilter<
-    Message,
-    {
-        usernameMatch: RegExpMatchArray
-    }
+  Message,
+  { usernameMatch: RegExpMatchArray }
 > => (msg) => {
-    const m = msg.sender.username?.match(regex)
+  const m = msg.sender.username?.match(regex)
 
-    if (m) {
-        ;(obj as any).usernameMatch = m
-        return true
-    }
-    return false
+  if (m) {
+    ;(obj as any).usernameMatch = m
+    return true
+  }
+  return false
 }
 
 dp.onNewMessage(
-    usernameRegex(/some_regex/),
-    async (msg) => {
-        // msg.usernameMatch is RegExpMatchArray
-    }
+  usernameRegex(/some_regex/),
+  async (msg) => {
+    // msg.usernameMatch is RegExpMatchArray
+  }
 )
 ```
 
@@ -304,16 +302,16 @@ in other frameworks:
 
 ```ts
 const loadSenderFromDb: UpdateFilter<Message, { senderDb: UserModel }> =
-    async (msg) => {
-        ;(msg as any).senderDb = await db.loadUser(msg.sender.id)
-        return true
-    }
+  async (msg) => {
+    ;(msg as any).senderDb = await db.loadUser(msg.sender.id)
+    return true
+  }
 
 dp.onNewMessage(
-    filters.and(filters.chat('private'), loadSenderFromDb),
-    async (msg) => {
-        // msg.senderDb is UserModel
-    }
+  filters.and(filters.chat('private'), loadSenderFromDb),
+  async (msg) => {
+    // msg.senderDb is UserModel
+  }
 )
 ```
 
@@ -324,10 +322,10 @@ Instead, do this right inside the handler code:
 
 ```ts
 dp.onNewMessage(
-    filters.chat('private'),
-    async (msg) => {
-        const senderDb = await db.loadUser(msg.sender.id)
-    }
+  filters.chat('private'),
+  async (msg) => {
+    const senderDb = await db.loadUser(msg.sender.id)
+  }
 )
 ```
 :::

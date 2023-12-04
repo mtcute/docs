@@ -32,7 +32,7 @@ as well as to their filters:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    // ...
+  // ...
 })
 ```
 
@@ -49,7 +49,7 @@ To retrieve the current state, use `state.get`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    const current = await state.get()
+  const current = await state.get()
 })
 ```
 
@@ -59,9 +59,9 @@ which will be used instead:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    const current = await state.get({ ... })
-    // or a function
-    const current = await state.get(() => ({ ... }))
+  const current = await state.get({ ... })
+  // or a function
+  const current = await state.get(() => ({ ... }))
 })
 ```
 
@@ -71,7 +71,7 @@ To update the state, use `state.set`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.set({ ... })
+  await state.set({ ... })
 })
 ```
 
@@ -80,8 +80,8 @@ will be considered "stale" and removed:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    // ttl = 1 hour
-    await state.set({ ... }, 3600)
+  // ttl = 1 hour
+  await state.set({ ... }, 3600)
 })
 ```
 
@@ -91,7 +91,7 @@ fetch the current state automatically):
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.merge({ ... })
+  await state.merge({ ... })
 })
 ```
 
@@ -100,7 +100,7 @@ otherwise an error will be thrown:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.merge({ ... }, defaultState)
+  await state.merge({ ... }, defaultState)
 })
 ```
 
@@ -110,7 +110,7 @@ To remove currently stored state, use `state.delete`:
 
 ```ts
 dp.onNewMessage(async (msg, state) => {
-    await state.delete()
+  await state.delete()
 })
 ```
 
@@ -121,10 +121,10 @@ so you can make [custom filters](filters.html#custom-filters) that use it:
 
 ```ts
 dp.onNewMessage(
-    (msg, state) => state.get().then((res) => res?.action === 'ENTER_PASSWORD'),
-    async (msg, state) => {
-        // ...
-    }
+  (msg, state) => state.get().then((res) => res?.action === 'ENTER_PASSWORD'),
+  async (msg, state) => {
+    // ...
+  }
 )
 ```
 
@@ -132,12 +132,12 @@ However, the above isn't very clean, so the library provides `filters.state`:
 
 ```ts
 dp.onNewMessage(
-    filters.state((state) => state.action === 'ENTER_PASSWORD'),
-    async (msg, state: UpdateState<ActionEnterPassword>) => {
-        const current = await state.get()
-        // or, if you have strict null checks
-        const current = (await state.get())!
-    }
+  filters.state((state) => state.action === 'ENTER_PASSWORD'),
+  async (msg, state: UpdateState<ActionEnterPassword>) => {
+    const current = await state.get()
+    // or, if you have strict null checks
+    const current = (await state.get())!
+  }
 )
 ```
 
@@ -149,10 +149,10 @@ use `filters.stateEmpty`:
 
 ```ts
 dp.onNewMessage(
-    filters.stateEmpty,
-    async (msg, state) => {
-        // ...
-    }
+  filters.stateEmpty,
+  async (msg, state) => {
+    // ...
+  }
 )
 ```
 

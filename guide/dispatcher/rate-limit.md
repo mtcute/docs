@@ -9,21 +9,21 @@ is to call `.rateLimit` function:
 
 ```ts
 dp.onNewMessage(
-    filters.command('some_expensive_command'),
-    async (msg, state) => {
-        try {
-            // 1 request every 15 seconds
-            await state.rateLimit('some_expensive_command', 1, 15)
-        } catch (e) {
-            if (e instanceof RateLimitError) {
-                await msg.replyText('Try again later')
-            }
-            throw e
-        }
-
-        const result = doSomeExpensiveComputations()
-        await msg.replyText(result)
+  filters.command('some_expensive_command'),
+  async (msg, state) => {
+    try {
+      // 1 request every 15 seconds
+      await state.rateLimit('some_expensive_command', 1, 15)
+    } catch (e) {
+      if (e instanceof RateLimitError) {
+        await msg.replyText('Try again later')
+      }
+      throw e
     }
+
+    const result = doSomeExpensiveComputations()
+    await msg.replyText(result)
+  }
 )
 ```
 
@@ -42,13 +42,13 @@ it waits until the rate limit is replenished and then returns:
 
 ```ts
 dp.onNewMessage(
-    filters.start,
-    async (msg, state) => {
-        // no more than 2 rps per user
-        await state.throttle('start', 2, 1)
+  filters.start,
+  async (msg, state) => {
+    // no more than 2 rps per user
+    await state.throttle('start', 2, 1)
 
-        await msg.replyText('Hi!')
-    }
+    await msg.replyText('Hi!')
+  }
 )
 ```
 

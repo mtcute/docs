@@ -33,14 +33,14 @@ pnpm add @mtcute/node
 import { NodeTelegramClient, html } from '@mtcute/node'
 
 const tg = new NodeTelegramClient({
-    apiId: API_ID,
-    apiHash: 'API_HASH'
+  apiId: API_ID,
+  apiHash: 'API_HASH'
 })
 
 tg.run({ ... }, async (self) => {
-    console.log(`Logged in as ${self.displayName}`)
+  console.log(`Logged in as ${self.displayName}`)
 
-    await tg.sendText('self', html`Hello from <b>MTCute</b>!`)
+  await tg.sendText('self', html`Hello from <b>MTCute</b>!`)
 })
 ```
 4. That's literally it! Happy hacking 🚀
@@ -63,8 +63,8 @@ no extra steps are required. Otherwise, you'll need to enable it manually:
 import { NodeNativeCryptoProvider } from '@mtcute/crypto-node'
 
 const tg = new TelegramClient({
-    crypto: () => new NodeNativeCryptoProvider(),
-    ...
+  crypto: () => new NodeNativeCryptoProvider(),
+  ...
 })
 ```
 
@@ -96,8 +96,8 @@ and then use it as you wish:
 import { TelegramClient } from '@mtcute/client'
 
 const tg = new TelegramClient({
-    apiId: 123456,
-    apiHash: '0123456789abcdef0123456789abcdef',
+  apiId: 123456,
+  apiHash: '0123456789abcdef0123456789abcdef',
 })
 
 tg.call({ _: 'help.getConfig' }).then((res) => console.log(res))

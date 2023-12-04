@@ -15,10 +15,10 @@ the parsed update and the [state](./state) (if applicable):
 
 ```ts
 dp.onNewMessage(
-    filters.command('do_stuff'),
-    async (msg) => {
-        throw new Error('Some error')
-    }
+  filters.command('do_stuff'),
+  async (msg) => {
+    throw new Error('Some error')
+  }
 )
 
 dp.onError(async (error, update, state) => {
@@ -58,10 +58,10 @@ that caused this error:
 
 ```ts
 dp.onNewMessage(
-    filters.command('do_stuff'),
-    async (msg) => {
-        throw new Error('Some error')
-    }
+  filters.command('do_stuff'),
+  async (msg) => {
+    throw new Error('Some error')
+  }
 )
 
 tg.onError((err) => {
@@ -77,16 +77,16 @@ dispatcher stops (the same way as if it returned `StopPropagation`):
 
 ```ts
 dp.onNewMessage(
-    filters.command('do_stuff'),
-    async (msg) => {
-        throw new Error('Some error')
-    }
+  filters.command('do_stuff'),
+  async (msg) => {
+    throw new Error('Some error')
+  }
 )
 
 dp.onNewMessage(
-    async (msg) => {
-        // will not reach
-    }
+  async (msg) => {
+    // will not reach
+  }
 )
 ```
 
@@ -128,9 +128,9 @@ dp1.addChild(dp2)
 
 dp.onError(() => console.log('DP caught error'))
 dp1.onError(() => {
-    console.log('DP1 caught error')
+  console.log('DP1 caught error')
 
-    return dp1.propagateErrorToParent(...arguments)
+  return dp1.propagateErrorToParent(...arguments)
 })
 dp2.onError(() => console.log('DP2 caught error'))
 

@@ -42,16 +42,16 @@ import { NodeTelegramClient } from '@mtcute/node'
 
 // Replace with your own values
 const tg = new NodeTelegramClient({
-    apiId: API_ID,
-    apiHash: 'API_HASH'
+  apiId: API_ID,
+  apiHash: 'API_HASH'
 })
 
 tg.run({
-    phone: () => tg.input('Phone > '),
-    code: () => tg.input('Code > '),
-    password: () => tg.input('Password > ')
+  phone: () => tg.input('Phone > '),
+  code: () => tg.input('Code > '),
+  password: () => tg.input('Password > ')
 }, async (self) => {
-    console.log(`Logged in as ${self.displayName}`)
+  console.log(`Logged in as ${self.displayName}`)
 })
 ```
 
@@ -84,14 +84,14 @@ import { NodeTelegramClient } from '@mtcute/node'
 
 // Replace with your own values
 const tg = new NodeTelegramClient({
-    apiId: API_ID,
-    apiHash: 'API_HASH'
+  apiId: API_ID,
+  apiHash: 'API_HASH'
 })
 
 tg.run({
-    botToken: '12345678:0123456789abcdef0123456789abcdef'
+  botToken: '12345678:0123456789abcdef0123456789abcdef'
 }, async (self) => {
-    console.log(`Logged in as ${self.displayName}`)
+  console.log(`Logged in as ${self.displayName}`)
 })
 ```
 
@@ -116,8 +116,8 @@ API_HASH=0123456789abcdef0123456789abcdef
 import { NodeTelegramClient } from '@mtcute/node'
 
 const tg = new NodeTelegramClient({
-    apiId: process.env.API_ID,
-    apiHash: process.env.API_HASH
+  apiId: process.env.API_ID,
+  apiHash: process.env.API_HASH
 })
 ```
 
@@ -150,20 +150,20 @@ First, check if you are already signed in:
 
 ```ts
 async function checkSignedIn() {
-    try {
-        // Try calling any method that requires authorization
-        // (getMe is the simplest one and likely the most useful,
-        // but you can use any other)
-        return await tg.getMe()
-    } catch (e) {
-        if (tl.RpcError.is(e, 'AUTH_KEY_UNREGISTERED')) {
-            // Not signed in, continue
-            return null
-        } else {
-            // Some other error, rethrow
-            throw e
-        }
+  try {
+    // Try calling any method that requires authorization
+    // (getMe is the simplest one and likely the most useful,
+    // but you can use any other)
+    return await tg.getMe()
+  } catch (e) {
+    if (tl.RpcError.is(e, 'AUTH_KEY_UNREGISTERED')) {
+      // Not signed in, continue
+      return null
+    } else {
+      // Some other error, rethrow
+      throw e
     }
+  }
 }
 ```
 
@@ -185,9 +185,9 @@ Now, you need to ask the user for the code and call `.signIn` method:
 const code = '12345' // code from user input
 
 const user = await tg.signIn({
-    phone,
-    phoneCodeHash: code.phoneCodeHash,
-    phoneCode: code
+  phone,
+  phoneCodeHash: code.phoneCodeHash,
+  phoneCode: code
 })
 ```
 
@@ -215,8 +215,8 @@ so you may want to resend it. To do that, you can use `.resendCode` method:
 
 ```ts
 code = await tg.resendCode({
-    phone,
-    phoneCodeHash: code.phoneCodeHash
+  phone,
+  phoneCodeHash: code.phoneCodeHash
 })
 ```
 
@@ -231,11 +231,11 @@ If you want the updates to be processed, you should manually use `startUpdatesLo
 
 ```ts
 if (await checkSignedIn()) {
-    tg.startUpdatesLoop()
+  tg.startUpdatesLoop()
 } else {
-    // some sign in logic
+  // some sign in logic
 
-    tg.startUpdatesLoop()
+  tg.startUpdatesLoop()
 }
 ```
 

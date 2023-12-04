@@ -18,9 +18,9 @@ to be dispatched, and can be used to skip that update altogether.
 
 ```ts
 dp.onPreUpdate((upd) => {
-    // randomly skip 10% of updates
-    if (Math.random() < 0.1)
-        return PropagationAction.Stop
+  // randomly skip 10% of updates
+  if (Math.random() < 0.1)
+    return PropagationAction.Stop
 })
 ```
 
@@ -31,9 +31,9 @@ by the dispatcher. Whether the update was handled is also provided here:
 
 ```ts
 dp.onPostUpdate((handled, upd) => {
-    if (handled) {
-        console.log(`handled ${upd.name}`)
-    }
+  if (handled) {
+    console.log(`handled ${upd.name}`)
+  }
 })
 ```
 
@@ -45,21 +45,21 @@ and error handler:
 
 ```ts
 interface TimerContext {
-    start: number
+  start: number
 }
 
 dp.onPreUpdate<TimerContext>((upd) => {
-    upd.start = Date.now()
+  upd.start = Date.now()
 })
 
 dp.onPostUpdate<TimerContext>((handled, upd) => {
-    if (handled) {
-        console.log(`handled ${upd.name} in ${Date.now() - upd.start} ms`)
-    }
+  if (handled) {
+    console.log(`handled ${upd.name} in ${Date.now() - upd.start} ms`)
+  }
 })
 
 dp.onError<TimerContext>((err, upd) => {
-    console.log(`error for ${upd.name} after ${Date.now() - upd.start} ms`)
+  console.log(`error for ${upd.name} after ${Date.now() - upd.start} ms`)
 })
 ```
 
