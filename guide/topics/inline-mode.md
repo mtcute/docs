@@ -36,7 +36,7 @@ const results = await tg.call({
     peer: chat,
     query: 'vivaldi',
     offset: ''
-})
+}, { throw503: true })
 ```
 
 Then, for example, to send the first result:
