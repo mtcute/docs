@@ -80,8 +80,8 @@ this feature was confirmed to be unimplemented yet by Levin (source unavailable)
 
 Because of Telegram's infrastructure.
 
-Firstly, supergroups reside in the same DC as
-the (original) creator, and if it is not the same as yours, it must first be
+Firstly, supergroups reside in the same DC as the (original) creator, 
+and if it is not the same as yours, it must first be
 passed through that DC, which incurs some delay.
 
 In the worst case, you, creator and other user are all in different DCs,
@@ -90,9 +90,6 @@ and it takes some time before the client receives an update about that.
 The same goes for text-mentioning a user from another DC. It takes time for
 the server to check access hash for that user since it is
 stored in another DC, and thus sending a message takes more time.
-
-> By the way, it seems that all bots reside in DC 2, so users from CIS
-> might have better time using the bots 😛
 
 Another reason is that updates in supergroups are sent in order of priority
 ([source](https://docs.pyrogram.org/faq#why-is-my-client-reacting-slowly-in-supergroups), unverified):
@@ -106,6 +103,11 @@ Another reason is that updates in supergroups are sent in order of priority
 
 This is **not** affected by the library, and we can't do anything about it.
 This can also be reproduced in TDLib and Bot API.
+
+Your best bet on improving update latency is to:
+  - Use `openChat` method on the client to open chats you are interested in
+  - Periodically call `setOffline(false)` to tell Telegram that you are online
+  - Use an account in the same DC as the peer you are interacting with
 
 ## Why do I get PEER_ID_INVALID?
 
@@ -128,7 +130,7 @@ outgoing message contains the verification code, and if it does,
 immediately revokes it.
 
 If you actually want to share it, consider somehow scrambling it,
-for example: `12345` → `1 2 3 4 5`
+for example: `12345` → `one two three four f1ve`
 
 ## How to avoid flood errors?
 

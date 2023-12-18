@@ -142,6 +142,23 @@ This **will** introduce delays of up to `messageGroupingInterval` ms for every m
 and may sometimes break ordering. Use with caution.
 :::
 
+## Opening chats
+
+For Telegram to properly send updates for channels (e.g. for channels that you are not a member of, 
+and for more consistent updates for channels that you are a member of), you need to open them first. 
+
+This is done by calling `openChat` method:
+
+```ts
+await tg.openChat('durov')
+```
+
+Once you're done, you can close the chat by calling `closeChat`:
+
+```ts
+await tg.closeChat('durov')
+```
+
 ## Dispatcher
 
 Dispatcher is a class that dispatches client events to registered handlers,

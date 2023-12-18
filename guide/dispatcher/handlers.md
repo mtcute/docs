@@ -142,13 +142,20 @@ not all chosen inline results may be reported
 ## Callback query
 
 Whenever user clicks on a [callback button](../topics/keyboards.html#inline-keyboards),
-`callback_query` handlers are dispatched:
+`callback_query` or `inline_callback_query` handlers are dispatched, based on the origin of the message:
 
 ```ts
 dp.onCallbackQuery(async (upd) => {
   await upd.answer({ text: '🌸' })
 })
+
+dp.onInlineCallbackQuery(async (upd) => {
+  await upd.answer({ text: '🌸' })
+})
 ```
+
+For messages sent normally by the bot (e.g. using `sendText`), `callback_query` handlers are dispatched.
+For messages sent from an inline query (e.g. inside `onInlineQuery`), `inline_callback_query` handlers are dispatched.
 
 ## Poll update
 
