@@ -22,7 +22,7 @@ dp.onNewMessage(
 )
 
 dp.onError(async (error, update, state) => {
-    if (update.type === 'new_message') {
+    if (update.name === 'new_message') {
         await update.data.replyText(`Error: ${error.message}`)
 
         return true

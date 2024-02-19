@@ -11,7 +11,7 @@ To download a file, just use `downloadIterable`, `downloadStream`,
 ```ts
 tg.on('new_message', async (msg) => {
     if (msg.media?.type === 'photo') {
-        await tg.downloadToFile(msg.media)
+        await tg.downloadToFile('download.jpg', msg.media)
     }
 })
 ```
