@@ -29,7 +29,7 @@ button's text.
 />
 
 ```ts
-import { BotKeyboard } from '@mtcute/client'
+import { BotKeyboard } from '@mtcute/core'
 
 await tg.sendText('username', 'Awesome keyboard!', {
     replyMarkup: BotKeyboard.reply([
@@ -81,7 +81,7 @@ button instructs it to do.
 />
 
 ```ts
-import { BotKeyboard } from '@mtcute/client'
+import { BotKeyboard } from '@mtcute/core'
 
 await tg.sendText('username', 'Awesome keyboard!', {
     replyMarkup: BotKeyboard.inline([

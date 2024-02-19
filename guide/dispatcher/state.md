@@ -18,7 +18,9 @@ a [storage](#storage) to the constructor:
 ```ts
 interface BotState { ... }
 
-const dp = Dispatcher.for<BotState>(tg)
+const dp = Dispatcher.for<BotState>(tg, {
+  storage: new MemoryStateStorage()
+})
 // or, for children
 const dp = Dispatcher.child<BotState>()
 ```
@@ -233,12 +235,37 @@ const state = await dp.getState<SomeInternalState>(...)
 ## Storage
 
 Storage is the backend used by Dispatcher to store state related information.
-A storage is a class that implements `IStateStorage`. 
-
-By default, the dispatcher will try using client's storage, but you can also provide your own:
+A storage is a class that implements [`IStateStorageProvider`](https://ref.mtcute.dev/types/_mtcute_dispatcher.IStateStorageProvider.html).
 
 ```ts
 const dp = Dispatcher.for<BotState>(tg, { storage: new MemoryStorage() })
 // or, locally for a child dispatcher:
 const dp = Dispatcher.child<BotState>({ storage: new MemoryStorage() })
+```
+
+### SQLite storage
+
+You can re-use your existing SQLite storage for FSM:
+
+```ts
+import { SqliteStorage } from '@mtcute/sqlite'
+import { SqliteStateStorage } from '@mtcute/dispatcher'
+
+const storage = new SqliteStorage('my-account')
+const tg = new TelegramClient({ ..., storage })
+
+const dp = Dispatcher.for<BotState>(tg, { 
+  storage: SqliteStateStorage.from(storage)
+})
+```
+
+Alternatively, you can create a new SQLite storage specifically for FSM:
+
+```ts
+import { SqliteStorageDriver } from '@mtcute/sqlite'
+import { SqliteStateStorage } from '@mtcute/dispatcher'
+
+const dp = Dispatcher.for<BotState>(tg, { 
+  storage: new SqliteStateStorage(new SqliteStorageDriver('my-state'))
+})
 ```

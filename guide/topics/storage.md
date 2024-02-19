@@ -59,7 +59,7 @@ const tg = new NodeTelegramClient({
 To improve performance, `@mtcute/sqlite` by default uses
 WAL mode ([Learn more](https://github.com/JoshuaWise/better-sqlite3/blob/master/docs/performance.md)).
 
-When using WAL, along with your SQLite file there will also
+When using WAL, along with your SQLite file there may also
 be `-shm` and `-wal` files. If you don't like seeing those files,
 instead of disabling WAL altogether, consider putting your storage in a folder
 (i.e. `new SqliteStorage('storage/my-account')`).
@@ -74,7 +74,7 @@ The preferred storage for a Web application is the one using IndexedDB,
 which is basically a browser's version of SQLite.
 
 ```ts{4}
-import { IdbStorage } from '@mtcute/core/storage/idb.js'
+import { IdbStorage } from '@mtcute/core'
 
 const tg = new BaseTelegramClient({
     storage: new IdbStorage('my-account')
@@ -82,7 +82,7 @@ const tg = new BaseTelegramClient({
 ```
 
 ::: tip
-If you are using `@mtcute/client`, IndexedDB storage is the default,
+In the browser, IndexedDB storage is the default,
 and you can simply pass a string with file name instead
 of instantiating `IdbStorage` manually:
 
@@ -93,47 +93,6 @@ const tg = new TelegramClient({
 ```
 :::
 
-
-## JSON-based storage
-
-`MemoryStorage` internally uses a simple JavaScript object
-containing all the data that should be persisted.
-`JsonMemoryStorage` is a subclass that implements methods
-to import and export the current storage to/from JSON string.
-
-::: warning
-JSON based storages are **not recommended** because of numerous issues
-that are out of library's control, and also because they don't persist
-everything, only the most important data.
-
-Instead, prefer SQLite or IndexedDB storage.
-:::
-
-### `localStorage` storage
-
-On top of `JsonMemoryStorage`, mtcute implements `LocalstorageStorage`
-that persists that JSON string in browser's `localStorage`:
-
-```ts{4}
-import { LocalstorageStorage } from '@mcute/core'
-
-const tg = new TelegramClient({
-    storage: new LocalstorageStorage('mtcute:my-account')
-})
-```
-
-### JSON file storage
-
-For Node JS, there is an option to use JSON file based storage.
-mtcute implements that in `JsonFileStorage` class:
-
-```ts{4}
-import { JsonFileStorage } from '@mcute/core'
-
-const tg = new TelegramClient({
-    storage: new JsonFileStorage('my-account.json')
-})
-```
 
 ## Session strings
 
@@ -155,7 +114,7 @@ which can then be imported:
 ```ts
 const tg = new TelegramClient({...})
 
-tg.importSession(SESSION_STRING)
+await tg.importSession(SESSION_STRING)
 // or
 tg.run({ session: SESSION_STRING })
 ```
@@ -178,11 +137,6 @@ string from multiple IPs at once, and that would immediately
 revoke that session.
 :::
 
-::: tip
-Calling `importSession` does not immediately import the session.
-Instead, it will be imported once the storage is ready.
-:::
-
 ::: details What is included?
 You might be curious about the information that the session
 string includes, and why is it so long.
@@ -196,15 +150,26 @@ is included, which results in an average of **407** characters
 
 ## Implementing custom storage
 
-The easiest way to implement a custom storage would be to
-make a subclass of `MemoryStorage` or `JsonMemoryStorage`,
+The easiest way to implement a custom storage would be to make a subclass of `MemoryStorage`,
 or check the [source code of SqliteStorage](https://github.com/mtcute/mtcute/blob/master/packages/sqlite/src/index.ts)
 and implement something similar with your DB of choice.
 
-## Storage for Dispatcher
+### Architecture
 
-We are getting a bit ahead of ourselves, but it is still important
-to mention.
+A storage provider in mtcute is composed of:
+- **Driver**: the core of the storage, which handles reading and writing data to the storage and implements
+  lifecycle methods like `load` and `save`. Driver also manages migrations for the storage, however the migrations 
+  themselves are not part of the driver, but are registered separately by repositories
+- **Repository**: a set of methods to read and write data of a specific entity to the storage, allowing for
+  more efficient and organized access to the data. Repositories are registered in the driver and are used to
+  access the data in the storage
 
-All of the storages provided by `@mtcute/*` packages are also compatible with
-Dispatcher's FSM and Scenes storage interface, and can be re-used there.
+Such composable architecture allows for custom storages to implement a specific set of repositories,
+and to reuse the same driver for different providers.
+
+In mtcute, these sets of repositories are defined:
+- [IMtStorageProvider](https://ref.mtcute.dev/types/_mtcute_core.index.IMtStorageProvider.html), used by `BaseTelegramClient` for low-level
+  MTProto data storage
+- [ITelegramStorageProvider](https://ref.mtcute.dev/interfaces/_mtcute_core.index.ITelegramStorageProvider.html), used by `TelegramClient` for basic caching
+  and update handling operations required for the client to work
+- [IStateStorageProvider](https://ref.mtcute.dev/types/_mtcute_dispatcher.IStateStorageProvider.html), used by `Dispatcher` for FSM and Scenes storage

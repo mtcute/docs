@@ -42,7 +42,7 @@ const results = await tg.call({
 Then, for example, to send the first result:
 
 ```ts
-import { randomLong } from '@mtcute/client/utils.js'
+import { randomLong } from '@mtcute/core/utils.js'
 
 const first = results.results[0]
 

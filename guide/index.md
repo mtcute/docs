@@ -77,7 +77,7 @@ Usage in browsers is a less common use case, so there's no scaffolding tool for 
 You can still add the library manually, though:
 
 ```bash
-pnpm add @mtcute/client
+pnpm add @mtcute/core
 ```
 
 > For vite, you'll also need to deoptimize `@mtcute/wasm` (see [vite#8427](https://github.com/vitejs/vite/issues/8427)):
@@ -93,11 +93,12 @@ pnpm add @mtcute/client
 and then use it as you wish:
 
 ```ts
-import { TelegramClient } from '@mtcute/client'
+import { TelegramClient } from '@mtcute/core'
 
 const tg = new TelegramClient({
   apiId: 123456,
   apiHash: '0123456789abcdef0123456789abcdef',
+  storage: 'my-account' // will use IndexedDB-based storage
 })
 
 tg.call({ _: 'help.getConfig' }).then((res) => console.log(res))
@@ -108,13 +109,13 @@ See also: [Tree-shaking](/guide/topics/treeshaking.md)
 ## Other runtimes
 
 ### Bun/Deno
-These runtimes are not actively supported and tested, but mtcute *seems* to work fine with them.
+These runtimes are not actively supported and tested yet, but mtcute *seems* to work fine with them.
 
 For Deno, however, you'll have to manually use the web crypto provider, since the Node
 compatibility layer is not good enough yet:
 
 ```ts
-import { TelegramClient } from 'npm:@mtcute/client'
+import { TelegramClient } from 'npm:@mtcute/core'
 import { WebCryptoProvider } from 'npm:@mtcute/core/utils/crypto/web.js'
 
 const tg = new TelegramClient({
@@ -137,6 +138,10 @@ as long as it also supports these featues:
   - `SubtleCrypto`, `WebAssembly` - for crypto functions (optional if using custom crypto)
 
 Of course, nothing is stopping you from bundling the library with Webpack or Rollup and using some polyfills.
+
+> **Note on bundling**
+> Some of the default exports will currently import Node.js built-in libraries.
+> 
 
 You'll also likely have to implement custom storage, networking and crypto, 
 see [Storage](/guide/topics/storage.md) and [Transport](/guide/topics/transport.md) for more info.

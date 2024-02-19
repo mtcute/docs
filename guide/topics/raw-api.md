@@ -1,6 +1,6 @@
 # Raw API
 
-`@mtcute/client` implements a lot of methods to simplify using the
+`@mtcute/core` implements a lot of methods to simplify using the
 Telegram APIs. However, it does not cover the entirety of the API,
 and in that case, you can resort to using the API directly.
 
@@ -48,7 +48,7 @@ briefly described below:
 | `hash` | Hash of the previously stored content, used to avoid re-fetching the content that is not modified. Methods that use this parameter have `*NotModified` class as one of the possible return types. It is not returned if `hash=0`. | `0`
 | `offset` | Offset for pagination | `0`
 | `limit` | Maximum number of items for pagination, max. limit is different for every method. | `0`, this will usually default to ~20
-| `randomId` | Random message ID to avoid sending the same message. | `randomLong()` (exported by `@mtcute/client/utils.js`)
+| `randomId` | Random message ID to avoid sending the same message. | `randomLong()` (exported by `@mtcute/core/utils.js`)
 
 Learn more about pagination in [Telegram docs](https://core.telegram.org/api/offsets)
 

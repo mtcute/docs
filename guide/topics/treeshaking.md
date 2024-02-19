@@ -12,7 +12,7 @@ To start using tree-shaking, there are a few things to keep in mind:
   
   For example, instead of this:
   ```ts
-  import { TelegramClient } from '@mtcute/client'
+  import { TelegramClient } from '@mtcute/core'
 
   const tg = new TelegramClient({ ... })
 
@@ -22,14 +22,13 @@ To start using tree-shaking, there are a few things to keep in mind:
   you should use this:
 
   ```ts
-  import { BaseTelegramClient } from '@mtcute/client'
-  import { sendText } from '@mtcute/client/methods/messages/send-text.js'
+  import { BaseTelegramClient } from '@mtcute/core'
+  import { sendText } from '@mtcute/core/methods/messages/send-text.js'
 
   const tg = new BaseTelegramClient({ ... })
 
   await sendText(tg, ...)
   ```
 
-- TL serialization is currently not tree-shakeable, because it is done
-  via a global map of constructors. 
-  There's no ETA on when this will be changed, so be ready for ~300 KB of non-shakeable code.
+- TL serialization is currently not tree-shakeable, because it is done via a global map of constructors. 
+  There's no ETA on when (or whether at all) this will be changed, so there *will* be ~300 KB of non-shakeable code.

@@ -59,14 +59,14 @@ tg.run({
 `tg.input` is a tiny wrapper over `readline` module in NodeJS,
 that will ask you for input in the console.
 
-It's not available in `@mtcute/client`, since it is platform-agnostic
+It's not available in `@mtcute/core`, since it is platform-agnostic
 :::
 
 `.run()` is a convenient wrapper method over `.start()` that logs you in using
 the given parameters and then calls a given function with the current user, and 
 handles all errors with the client's error handler.
 
-When using ESM, you may want to use `.start()` directly:
+When top-level await is available, you can use `.start()` directly instead:
 
 ```ts
 const self = await tg.start({ ... })

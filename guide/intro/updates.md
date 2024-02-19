@@ -24,7 +24,6 @@ const tg = new TelegramClient({
 
 The parameters themselves will be explained a bit below, for now let's just focus on how they are passed.
 
-### `@mtcute/client`
 `TelegramClient` has updates handling turned on by default, and you can configure it using `updates` parameter
 
 ```ts
@@ -37,7 +36,7 @@ const tg = new TelegramClient({
 })
 ```
 
-The updates themselves are dispatched on the client itself as events (see [reference](https://ref.mtcute.dev/classes/_mtcute_client.index.TelegramClient.html#on)):
+The updates themselves are dispatched on the client as events (see [reference](https://ref.mtcute.dev/classes/_mtcute_core.index.TelegramClient.html#on)):
 ```ts
 tg.on('new_message', (msg) => {
   console.log(msg.text)
@@ -69,53 +68,6 @@ tg.on('new_message', async (msg) => {
   }
 })
 ```
-:::
-
-### `@mtcute/core`
-
-`BaseTelegramClient` only dispatches raw [TL Updates](https://corefork.telegram.org/type/Updates), 
-and does not do any additional processing (like recovering gaps, ordering and parsing).
-
-If you want to make it do that, you can use [`enableUpdatesProcessing`](https://ref.mtcute.dev/functions/_mtcute_client.methods_updates.enableUpdatesProcessing.html)
-exported by `@mtcute/client`, and manually start updates loop once the client is guaranteed to be logged in:
-
-```ts
-import { enableUpdatesProcessing, startUpdatesLoop } from '@mtcute/client/methods/updates/index.js'
-
-const tg = new BaseTelegramClient(...)
-enableUpdatesProcessing(tg, {
-  catchUp: true,
-  onUpdate: (upd, peers) => console.log(upd, peers)
-})
-
-// later
-const user = await start(tg, { ... })
-await startUpdatesLoop(tg)
-```
-
-This will add update processing capabilities to the client, and make it dispatch all updates to the `onUpdate` callback.
-However, the above code *does not* enable updates parsing. 
-This means that `upd` will be a raw [TL Update](https://corefork.telegram.org/type/Update) 
-(nice naming, I know, don't blame me), which is guaranteed to be ordered properly however.
-
-To also parse the incoming updates, you can use [`makeParsedUpdateHandler`](https://ref.mtcute.dev/functions/_mtcute_client.methods_updates.makeParsedUpdateHandler.html):
-```ts
-const tg = new BaseTelegramClient(...)
-enableUpdatesProcessing(tg, {
-  catchUp: true,
-  onUpdate: makeParsedUpdateHandler({
-    onUpdate: (upd) => console.log(upd),
-  }),
-})
-```
-
-This way, `upd` will be one of [`ParsedUpdate` union](https://ref.mtcute.dev/types/_mtcute_client.index.ParsedUpdate.html).
-
-::: tip
-This approach makes the updates handling tree-shakeable. 
-
-Updates handling logic is fairly complex and takes a lot of space, and the parsed update classes are also quite large, 
-so you can just not use them and save some bundle size.
 :::
 
 ### Missed updates

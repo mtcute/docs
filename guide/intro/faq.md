@@ -160,7 +160,6 @@ put under observation to prevent violation of the ToS
 
 In some cases, even logging in with an unofficial client to an
 account created using an official one may trigger the system
-(I've had that issue multiple times with US VOIP phone numbers)
 
 If you are planning to implement an active userbot, be extra careful,
 avoid using VOIP numbers and try to minimize server load generated

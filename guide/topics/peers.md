@@ -66,9 +66,9 @@ Official clients silently "migrate" legacy groups to supergroups
 (actually channels) whenever the user wants to use a feature not supported
 by the Chat, like setting a username. Channel cannot be migrated back to Chat.
 
-### Chat in `@mtcute/client`
+### Chat in mtcute
 
-In addition to the mess described above, `@mtcute/client` also has a Chat type.
+In addition to the mess described above, mtcute also has a [Chat](https://ref.mtcute.dev/classes/_mtcute_core.index.Chat.html) type.
 It is used to represent anything where there can be messages,
 including users, legacy groups, supergroups, channels, etc.
 
