@@ -23,7 +23,7 @@ To start using tree-shaking, there are a few things to keep in mind:
 
   ```ts
   import { BaseTelegramClient } from '@mtcute/core'
-  import { sendText } from '@mtcute/core/methods/messages/send-text.js'
+  import { sendText } from '@mtcute/core/methods.js'
 
   const tg = new BaseTelegramClient({ ... })
 
