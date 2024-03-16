@@ -2,9 +2,9 @@
 
 This is a quick guide on how to get mtcute up and running as fast as possible.
 
-## NodeJS
+## Node.js
 
-For bots in NodeJS, there's a special package that scaffolds a project for you:
+For bots in Node.js, there's a special package that scaffolds a project for you:
 
 ```bash
 pnpm create @mtcute/bot my-awesome-bot
@@ -21,7 +21,7 @@ For existing projects, you'll probably want to add it manually, though.
 
 1. Get your API ID and Hash at
    [https://my.telegram.org/apps](https://my.telegram.org/apps).
-2. Install `@mtcute/node` meta-package:
+2. Install `@mtcute/node` package:
 
 ```bash
 pnpm add @mtcute/node
@@ -30,9 +30,9 @@ pnpm add @mtcute/node
 3. Import the package and create a client:
 
 ```ts
-import { NodeTelegramClient, html } from '@mtcute/node'
+import { TelegramClient, html } from '@mtcute/node'
 
-const tg = new NodeTelegramClient({
+const tg = new TelegramClient({
   apiId: API_ID,
   apiHash: 'API_HASH'
 })
@@ -57,43 +57,35 @@ pnpm add @mtcute/crypto-node
 ```
 
 When using `@mtcute/node`, native addon is loaded automatically,
-no extra steps are required. Otherwise, you'll need to enable it manually:
-
-```ts{4}
-import { NodeNativeCryptoProvider } from '@mtcute/crypto-node'
-
-const tg = new TelegramClient({
-  crypto: () => new NodeNativeCryptoProvider(),
-  ...
-})
-```
+no extra steps are required.
 
 ## Browser
 
 For browsers, it is recommended to use [vite](https://vitejs.dev). 
 Webpack is probably also fine, but you may need to do some extra configuration.
 
-Usage in browsers is a less common use case, so there's no scaffolding tool for it yet.
-You can still add the library manually, though:
+For usage in browsers, mtcute provides an `@mtcute/web` package:
 
 ```bash
-pnpm add @mtcute/core
+pnpm add @mtcute/web
 ```
 
-> For vite, you'll also need to deoptimize `@mtcute/wasm` (see [vite#8427](https://github.com/vitejs/vite/issues/8427)):
-> ```ts
-> // in vite.config.ts
-> export default defineConfig({
->   optimizeDeps: {
->     exclude: ['@mtcute/wasm']
->   }
-> })
-> ```
+::: info
+For vite, you'll need to deoptimize `@mtcute/wasm` (see [vite#8427](https://github.com/vitejs/vite/issues/8427)):
+```ts
+// in vite.config.ts
+export default defineConfig({
+  optimizeDeps: {
+    exclude: ['@mtcute/wasm']
+  }
+})
+```
+:::
 
-and then use it as you wish:
+Then, you can use it as you wish:
 
 ```ts
-import { TelegramClient } from '@mtcute/core'
+import { TelegramClient } from '@mtcute/web'
 
 const tg = new TelegramClient({
   apiId: 123456,
@@ -108,42 +100,48 @@ See also: [Tree-shaking](/guide/topics/treeshaking.md)
 
 ## Other runtimes
 
-### Bun/Deno
-These runtimes are not actively supported and tested yet, but mtcute *seems* to work fine with them.
+mtcute strives to be as runtime-agnostic as possible, so it should work in any environment that supports 
+some basic ES2020 features.
 
-For Deno, however, you'll have to manually use the web crypto provider, since the Node
-compatibility layer is not good enough yet:
+### Bun
 
-```ts
-import { TelegramClient } from 'npm:@mtcute/core'
-import { WebCryptoProvider } from 'npm:@mtcute/core/utils/crypto/web.js'
+There is currently no special package for Bun, but the Node.js package should work just fine for now.
+It won't use Bun-specific APIs, which might be suboptimal, but it should work.
 
-const tg = new TelegramClient({
-  crypto: () => new WebCryptoProvider({ crypto: window.crypto }),
-  // ...
-})
-```
-Other than that, you can likely use it the same way as in NodeJS. 
+If there are some compatibility issues (i.e. something works in Node.js and doesn't in Bun),
+it might be better to open an issue at Bun's repository instead.
 
-If you find any issues when running in Bun/Deno, please first check if they are 
-reproducible in Node. Feel free to open an issue in both cases, but please note that
-issues with alternative runtimes interop are not a priority.
+### Deno
+
+Deno is not actively supported right now, but `npm:@mtcute/web` should work fine for now.
 
 ### Anything else?
 
-mtcute supports both ESM and CJS, so it should work in any environment that supports either of them,
-as long as it also supports these featues:
-  - `ArrayBuffer`, `Uint8Array`, `TextEncoder/TextDecoder` - for binary data
-  - `ReadableStream` - for uploading/downloading files
-  - `SubtleCrypto`, `WebAssembly` - for crypto functions (optional if using custom crypto)
+In case your runtime of choice is not listed above, you can try using `@mtcute/core` directly.
 
-Of course, nothing is stopping you from bundling the library with Webpack or Rollup and using some polyfills.
+You will need to provide your own implementations of storage, networking and crypto - feel free to take a 
+look at web/node implementations for reference (or even extend them to better fit your needs, e.g. if some runtime
+only partially supports some Node.js APIs).
 
-> **Note on bundling**
-> Some of the default exports will currently import Node.js built-in libraries.
-> 
+```ts
+import { TelegramClient } from '@mtcute/core/client.js'
+import { setPlatform } from '@mtcute/core/platform.js'
 
-You'll also likely have to implement custom storage, networking and crypto, 
-see [Storage](/guide/topics/storage.md) and [Transport](/guide/topics/transport.md) for more info.
+setPlatform(new MyPlatform())
 
-If you manage to get mtcute working in some exotic environment, please let me know!
+const tg = new TelegramClient({
+  ...,
+  storage: new MyStorage(),
+  crypto: new MyCrypto()
+  transport: () => new MyTransport(),
+})
+```
+
+::: info 
+You only need to call `setPlatform` once, before creating any clients. 
+Platform is set once globally and cannot be changed afterwards.
+It is safe to call `setPlatform` multiple times, as long as the constructor is the same - it will be ignored if the platform is already set.
+
+A good starting point might be to use [WebPlatform](https://ref.mtcute.dev/classes/_mtcute_web.WebPlatform.html),
+since it implements everything in portable JavaScript.
+:::

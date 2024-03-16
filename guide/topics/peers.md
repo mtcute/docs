@@ -169,8 +169,8 @@ third-party libraries, including mtcute.
 
 
 ::: tip
-The concept described below is implemented and exported by
-`@mtcute/core`, see [getBasicPeerType](https://ref.mtcute.dev/functions/_mtcute_core.index.getBasicPeerType.html),
+The concept described below is implemented and exported in utils, 
+see [getBasicPeerType](https://ref.mtcute.dev/functions/_mtcute_core.index.getBasicPeerType.html),
 [getMarkedPeerId](https://ref.mtcute.dev/functions/_mtcute_core.index.getMarkedPeerId.html),
 :::
 

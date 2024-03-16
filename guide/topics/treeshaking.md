@@ -12,7 +12,7 @@ To start using tree-shaking, there are a few things to keep in mind:
   
   For example, instead of this:
   ```ts
-  import { TelegramClient } from '@mtcute/core'
+  import { TelegramClient } from '@mtcute/web'
 
   const tg = new TelegramClient({ ... })
 
@@ -22,8 +22,8 @@ To start using tree-shaking, there are a few things to keep in mind:
   you should use this:
 
   ```ts
-  import { BaseTelegramClient } from '@mtcute/core'
-  import { sendText } from '@mtcute/core/methods.js'
+  import { BaseTelegramClient } from '@mtcute/web'
+  import { sendText } from '@mtcute/web/methods.js'
 
   const tg = new BaseTelegramClient({ ... })
 

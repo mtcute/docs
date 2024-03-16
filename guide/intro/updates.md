@@ -127,9 +127,9 @@ Dispatcher is quite a powerful thing, and we will explore it in-depth in
 a separate section. For now, let's just register a dispatcher and add a simple handler:
 
 ```ts
-import { NodeTelegramClient, Dispatcher } from '@mtcute/node'
+import { TelegramClient, Dispatcher } from '@mtcute/node'
 
-const tg = new NodeTelegramClient(...)
+const tg = new TelegramClient(...)
 const dp = new Dispatcher(tg)
 
 dp.onNewMessage(async (msg) => {

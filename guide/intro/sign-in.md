@@ -38,10 +38,10 @@ Never give away your API hash. It can not be revoked.
 Now that we have got our API keys, we can sign in into our account:
 
 ```ts
-import { NodeTelegramClient } from '@mtcute/node'
+import { TelegramClient } from '@mtcute/node'
 
 // Replace with your own values
-const tg = new NodeTelegramClient({
+const tg = new TelegramClient({
   apiId: API_ID,
   apiHash: 'API_HASH'
 })
@@ -56,7 +56,7 @@ tg.run({
 ```
 
 ::: tip
-`tg.input` is a tiny wrapper over `readline` module in NodeJS,
+`tg.input` is a tiny wrapper over `readline` module in Node.js,
 that will ask you for input in the console.
 
 It's not available in `@mtcute/core`, since it is platform-agnostic
@@ -66,7 +66,7 @@ It's not available in `@mtcute/core`, since it is platform-agnostic
 the given parameters and then calls a given function with the current user, and 
 handles all errors with the client's error handler.
 
-When top-level await is available, you can use `.start()` directly instead:
+When top-level await is available, you may want to use `.start()` directly instead:
 
 ```ts
 const self = await tg.start({ ... })
@@ -80,10 +80,10 @@ You can also use mtcute for bots (created via [@BotFather](https://t.me/BotFathe
 You will still need API ID and Hash, though:
 
 ```ts{10}
-import { NodeTelegramClient } from '@mtcute/node'
+import { TelegramClient } from '@mtcute/node'
 
 // Replace with your own values
-const tg = new NodeTelegramClient({
+const tg = new TelegramClient({
   apiId: API_ID,
   apiHash: 'API_HASH'
 })
@@ -113,9 +113,9 @@ API_HASH=0123456789abcdef0123456789abcdef
 
 ```ts
 // your-file.ts
-import { NodeTelegramClient } from '@mtcute/node'
+import { TelegramClient } from '@mtcute/node'
 
-const tg = new NodeTelegramClient({
+const tg = new TelegramClient({
   apiId: process.env.API_ID,
   apiHash: process.env.API_HASH
 })

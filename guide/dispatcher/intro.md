@@ -12,9 +12,9 @@ To use a dispatcher, you need to first create a bound dispatcher
 using `Dispatcher.for` method:
 
 ```ts
-import { NodeTelegramClient, Dispatcher } from '@mtcute/node'
+import { Dispatcher } from '@mtcute/dispatcher'
 
-const tg = new NodeTelegramClient({...})
+const tg = new TelegramClient({...})
 const dp = Dispatcher.for(tg)
 ```
 

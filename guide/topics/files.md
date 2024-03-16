@@ -103,9 +103,8 @@ since that would result in a server-sent error.
 ## File IDs
 
 ::: tip
-If you are using `@mtcute/core` or just want to work with
-File IDs, they are implemented in `@mtcute/file-id`, and this
-package can be easily used outside of mtcute.
+File IDs are implemented in `@mtcute/file-id` package, which
+can be easily used outside of mtcute.
 :::
 
 If you ever worked with the Bot API, you probably already know what File ID

@@ -78,7 +78,7 @@ mtcute has a group of its own errors that are used to indicate
 that the provided input is invalid, or that the server
 returned something weird.
 
-All these errors are subclassed from `MtcuteError` and are exported from `@mtcute/core`:
+All these errors are subclassed from `MtcuteError`:
 
 | Name | Description | Package |
 |---|---|---|

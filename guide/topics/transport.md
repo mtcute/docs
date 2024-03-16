@@ -7,20 +7,20 @@ supports proxies via additional packages.
 
 ## TCP transport
 
-TCP transport is the default transport for NodeJS, and is implemented
-using `net.Socket` in `TcpTransport`:
+TCP transport is the default transport for Node.js, and is implemented
+using `net.Socket` in `@mtcute/node`:
 
 ```ts{5}
-import { BaseTelegramClient, TcpTransport } from '@mtcute/core'
+import { TcpTransport } from '@mtcute/node'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     // ...
     transport: () => new TcpTransport()
 })
 ```
 
 ::: tip
-In NodeJS, it is used automatically, you don't need to pass this explicitly
+In Node.js it is used automatically, you don't need to pass this explicitly
 :::
 
 ## WebSocket transport
@@ -28,12 +28,12 @@ In NodeJS, it is used automatically, you don't need to pass this explicitly
 WebSocket transport is mostly used for the browser,
 but can also be used in NodeJS.
 
-It is implemented in `WebSocketTransport`:
+It is implemented in `@mtcute/web`:
 
 ```ts{5}
-import { BaseTelegramClient, WebSocketTransport } from '@mtcute/core'
+import { WebSocketTransport } from '@mtcute/web'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     // ...
     transport: () => new WebSocketTransport()
 })
@@ -47,7 +47,7 @@ In browser, it is used automatically, you don't need to pass this explicitly
 
 To access Telegram via HTTP(s) proxy, you can use
 `HttpProxyTcpTransport`, which is provided
-by `@mtcute/http-proxy`:
+by `@mtcute/http-proxy` (Node.js only):
 
 ```bash
 pnpm add @mtcute/http-proxy
@@ -56,7 +56,7 @@ pnpm add @mtcute/http-proxy
 ```ts{5-8}
 import { HttpProxyTcpTransport } from '@mtcute/http-proxy'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     // ...
     transport: () => new HttpProxyTcpTransport({
         host: '127.0.0.1',
@@ -69,7 +69,7 @@ const tg = new BaseTelegramClient({
 
 To access Telegram via SOCKS4/5 proxy, you can use
 `SocksTcpTransport`, which is provided
-by `@mtcute/socks-proxy`:
+by `@mtcute/socks-proxy` (Node.js only):
 
 ```bash
 pnpm add @mtcute/socks-proxy
@@ -78,7 +78,7 @@ pnpm add @mtcute/socks-proxy
 ```ts{5-8}
 import { SocksTcpTransport } from '@mtcute/socks-proxy'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     // ...
     transport: () => new SocksTcpTransport({
         host: '127.0.0.1',
@@ -90,7 +90,7 @@ const tg = new BaseTelegramClient({
 ## MTProxy transport
 
 To access Telegram via MTProxy (MTProto proxy), you can use
-`MtProxyTcpTransport`, which is provided by `@mtcute/mtproxy`:
+`MtProxyTcpTransport`, which is provided by `@mtcute/mtproxy` (Node.js only):
 
 ```bash
 pnpm add @mtcute/mtproxy
@@ -99,7 +99,7 @@ pnpm add @mtcute/mtproxy
 ```ts{5-8}
 import { MtProxyTcpTransport } from '@mtcute/mtproxy'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     // ...
     transport: () => new MtProxyTcpTransport({
         host: '127.0.0.1',
@@ -135,5 +135,3 @@ You can check out source code for the bundled transports
 to get the basic idea
 [here](https://github.com/mtcute/mtcute/tree/master/packages/core/src/network/transports),
 and re-use any packet codecs that are included.
-
-[comment]: <> (TOOD: detailed docs on how this works)

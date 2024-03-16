@@ -12,7 +12,7 @@ and never persist it anywhere, and this is exactly
 what `MemoryStorage` does.
 
 ```ts{4}
-import { MemoryStorage } from '@mcute/core/storage/memory.js'
+import { MemoryStorage } from '@mcute/core'
 
 const tg = new TelegramClient({
     storage: new MemoryStorage()
@@ -50,7 +50,7 @@ and you can simply pass a string with file name instead
 of instantiating `SqliteStorage` manually:
 
 ```ts
-const tg = new NodeTelegramClient({
+const tg = new TelegramClient({
     storage: 'my-account.session'
 })
 ```
@@ -74,9 +74,9 @@ The preferred storage for a Web application is the one using IndexedDB,
 which is basically a browser's version of SQLite.
 
 ```ts{4}
-import { IdbStorage } from '@mtcute/core'
+import { IdbStorage } from '@mtcute/web'
 
-const tg = new BaseTelegramClient({
+const tg = new TelegramClient({
     storage: new IdbStorage('my-account')
 })
 ```

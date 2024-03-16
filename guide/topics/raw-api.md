@@ -1,8 +1,8 @@
 # Raw API
 
-`@mtcute/core` implements a lot of methods to simplify using the
+mtcute implements a lot of methods to simplify using the
 Telegram APIs. However, it does not cover the entirety of the API,
-and in that case, you can resort to using the API directly.
+and in that case, you can resort to using the MTProto APIs directly.
 
 ::: warning
 When using MTProto API directly, you will have to manually

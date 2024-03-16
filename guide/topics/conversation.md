@@ -16,18 +16,6 @@ This may change in the future, but for now you should use [scenes](/guide/dispat
 
 ## Usage
 
-::: details Setup for `@mtcute/core`
-Conversations may also work with `BaseTelegramClient`, but some additional setup is required:
-1. You need to enable updates processing and parsing (see [here](/guide/intro/updates.html#mtcute-core))
-2. Put the following code in the parsed update handler:
-   ```ts
-   onUpdate: (upd) => {
-        Conversation.handleUpdate(tg, update)
-        // ...
-   }
-   ```
-:::
-
 Create a `Conversation` object and pass `TelegramClient` and the peer you want
 there:
 
