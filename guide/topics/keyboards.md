@@ -29,8 +29,6 @@ button's text.
 />
 
 ```ts
-import { BotKeyboard } from '@mtcute/core'
-
 await tg.sendText('username', 'Awesome keyboard!', {
     replyMarkup: BotKeyboard.reply([
         [BotKeyboard.text('First button')],
@@ -81,8 +79,6 @@ button instructs it to do.
 />
 
 ```ts
-import { BotKeyboard } from '@mtcute/core'
-
 await tg.sendText('username', 'Awesome keyboard!', {
     replyMarkup: BotKeyboard.inline([
         [BotKeyboard.callback('First button', 'btn:1')],
@@ -197,8 +193,6 @@ and the user can switch between them using inline buttons.
 First, let's declare a builder for the button:
 
 ```ts
-import { CallbackDataBuilder } from '@mtcute/dispatcher'
-
 const PostButton = new CallbackDataBuilder('post', 'id', 'action')
 ```
 

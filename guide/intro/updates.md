@@ -127,8 +127,6 @@ Dispatcher is quite a powerful thing, and we will explore it in-depth in
 a separate section. For now, let's just register a dispatcher and add a simple handler:
 
 ```ts
-import { TelegramClient, Dispatcher } from '@mtcute/node'
-
 const tg = new TelegramClient(...)
 const dp = new Dispatcher(tg)
 
@@ -150,8 +148,6 @@ time you will want to *filter* the events, and only react to some of them.
 Let's make our code only handle messages containing media:
 
 ```ts
-import { filters } from '@mtcute/node'
-
 dp.onNewMessage(
   filters.media,
   async (msg) => {

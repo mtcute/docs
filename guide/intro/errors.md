@@ -18,8 +18,6 @@ Sadly, JavaScript does not provide a nice syntax to handle different kinds
 of errors, so you will need to write a bit of boilerplate:
 
 ```ts
-import { tl } from '@mtcute/node'
-
 try {
   // your code //
 } catch (e) {

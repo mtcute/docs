@@ -86,8 +86,6 @@ To prevent the update from being handled by any other handlers
 within the same dispatcher, you can use `PropagationAction.Stop`:
 
 ```ts
-import { PropagationAction } from '@mtcute/dispatcher'
-
 dp.onNewMessage(
   filters.or(filters.text, filters.sticker),
   async (msg) => {
@@ -121,8 +119,6 @@ Dispatchers yet, but the idea is pretty simple.
 prevents the handlers from child dispatchers to be executed:
 
 ```ts
-import { PropagationAction } from '@mtcute/dispatcher'
-
 dp.onNewMessage(
   filters.or(filters.text, filters.sticker),
   async (msg) => {
@@ -153,8 +149,6 @@ symbol. It makes the dispatcher continue propagating this update within
 the same group even though some handler from that group was already executed:
 
 ```ts
-import { PropagationAction } from '@mtcute/dispatcher'
-
 dp.onNewMessage(
   filters.or(filters.text, filters.sticker),
   async (msg) => {
