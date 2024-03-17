@@ -73,7 +73,6 @@ export default ({ mode }) => defineConfig({
             { text: "Inline mode", link: "/guide/topics/inline-mode" },
             { text: "Conversation", link: "/guide/topics/conversation" },
             { text: "Raw API", link: "/guide/topics/raw-api" },
-            { text: "Tree-shaking", link: "/guide/topics/treeshaking" },
           ],
         },
         {
@@ -95,6 +94,14 @@ export default ({ mode }) => defineConfig({
             { text: "Scenes", link: "/guide/dispatcher/scenes" },
           ],
         },
+        {
+          text: 'Advanced',
+          items: [
+            { text: "Tree-shaking", link: "/guide/advanced/treeshaking" },
+            { text: "Workers", link: "/guide/advanced/workers" },
+            { text: "Converting sessions", link: "/guide/advanced/session-convert" },
+          ]
+        }
       ],
     },
 

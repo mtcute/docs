@@ -96,7 +96,7 @@ const tg = new TelegramClient({
 tg.call({ _: 'help.getConfig' }).then((res) => console.log(res))
 ```
 
-See also: [Tree-shaking](/guide/topics/treeshaking.md)
+See also: [Tree-shaking](/guide/advanced/treeshaking.md)
 
 ## Other runtimes
 

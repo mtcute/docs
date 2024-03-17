@@ -30,7 +30,7 @@ another application using the same account.
 3. Press *Create Application*, and you'll see your `api_id` and `api_hash`.
 
 :::warning
-Never give away your API hash. It can not be revoked.
+Be careful with your API hash. It can not be revoked.
 :::
 
 ## Signing in
