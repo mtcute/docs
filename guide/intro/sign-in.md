@@ -120,7 +120,7 @@ dotenv ts-node your-file.ts
 
 ## Using a proxy
 
-When using NodeJS, you can also connect to Telegram through proxy.
+When using Node.js, you can also connect to Telegram through proxy.
 This is particularly useful in countries like Iran or Russia, where
 Telegram might be limited.
 

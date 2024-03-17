@@ -26,7 +26,7 @@ In Node.js it is used automatically, you don't need to pass this explicitly
 ## WebSocket transport
 
 WebSocket transport is mostly used for the browser,
-but can also be used in NodeJS.
+but can also be used in Node.js.
 
 It is implemented in `@mtcute/web`:
 

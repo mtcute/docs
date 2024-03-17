@@ -47,7 +47,7 @@ tg.run({ ... }, async (self) => {
 
 ### Native crypto addon
 mtcute also provides `@mtcute/crypto-node` package, that implements
-a native NodeJS addon for crypto functions used in MTProto.
+a native Node.js addon for crypto functions used in MTProto.
 
 Using this addon improves overall library performance (especially when uploading/downloading files), 
 so it is advised that you install it as well:

@@ -24,7 +24,7 @@ await tg.downloadToFile('download.jpg', 'AgACAgEAAxkBA...33gAgABHwQ')
 ```
 
 ::: tip
-`downloadToFile` is only available for NodeJS.
+`downloadToFile` is only available for Node.js.
 Other methods are environment agnostic.
 :::
 
@@ -39,12 +39,12 @@ to re-use an existing file (see [File IDs](#file-ids)).
 
 `InputFileLike` can be one of:
  - `Buffer`, in this case contents of the buffer will be uploaded as file
- - Readable stream (both NodeJS and Web are supported)
+ - Readable stream (both.js and Web are supported)
  - `File` from the Web API
  - `Response` from `window.fetch` or `node-fetch`
  - `UploadedFile`, see [Uploading files manually](#uploading-files-manually)
  - `string` with URL: `https://example.com/file.jpg` (only supported sometimes)
- - `string` with file path (only NodeJS): `file:path/to/file.jpg` (note the `file:` prefix)
+ - `string` with file path (only Node.js): `file:path/to/file.jpg` (note the `file:` prefix)
  - `string` with [File ID](#file-ids)
 
 ```ts
@@ -201,7 +201,7 @@ It has a bunch of options, but the only required one is `file`.
 
 ### Uploading a local file
 
-To upload a local file from NodeJS, you can either provide file path,
+To upload a local file from Node.js, you can either provide file path,
 or a readable stream (note that here you don't need `file:` prefix):
 
 ```ts

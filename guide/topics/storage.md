@@ -29,7 +29,7 @@ and also caching won't work past a single run.
 
 ## SQLite storage
 
-The preferred storage for a NodeJS application is the one using SQLite,
+The preferred storage for a Node.js application is the one using SQLite,
 because it does not require loading the entire thing into memory, and
 is also faster than simply reading/writing a file.
 
