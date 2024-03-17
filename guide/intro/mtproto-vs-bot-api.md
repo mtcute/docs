@@ -24,8 +24,9 @@ to roll out the current version of MTProto
 ([source](https://news.ycombinator.com/item?id=6916860)).
 It is used to communicate between clients and Telegram servers.
 
-MTProto API by itself is a rather common these days RPC-like API,
-where MTProto and TL are used to serialize, encrypt and process the requests.
+On the surface, MTProto API is basically an RPC,
+where MTProto and TL are used behind the scenes 
+to serialize, encrypt and process the requests.
 ~~*Sounds like VK API with extra steps, right?*~~
 
 ## Why MTProto?
@@ -44,25 +45,30 @@ Apart from smaller overhead, using MTProto has many other advantages, including:
 
 |  | Bot API | MTProto |
 |---|---|---|
-| Userbots | Bot API only allows logging in as a bot. | Both bots and users.
-| Files | 20 MB download, 50 MB upload.<br/>(on public instance) | No limits (except global limit of 2000 MB)
-| Objects | Often brief and miss important information. | Contain *a lot* of information
-| Methods | Lots of methods for the same thing (`send_*`), missing more important methods (like `getMessages`). | Powerful and concise methods
-| Updates | Only a limited subset. | Updates about virtually anything that had happened.
-| Errors | Often non-informative (e.g. slow mode is the same as flood wait) and not machine-readable. | Informative and simple to use.
-| Version | Updates rarely, gets new features slowly | Updates with the TL layer
-| Compatibility | Updates randomly, you have to prepare for the upcoming breaking changes. | You can stay on older version for as long as you need.
+| Userbots | Only bots | Both bots and users.
+| Files | 20 MB download, 50 MB upload. | No limits (except global limit of 2000 MB)
+| Objects | Often brief and non-exhaustive | Exposes anything you can think of
+| Updates | Only a limited subset | Updates about virtually anything that had happened
+| Errors | Often non-informative (e.g. slow mode is the same as flood wait) and not machine-readable | Informative and simple to use
+| Version | Receives updates slower | Updates with the TL layer
+| Compatibility | Updates randomly, you have to prepare for the upcoming breaking changes.<br/>Attempts to stay backwards-compatible, leading to weird hacks | You can stay on older version for as long as you need
 
-## Drawbacks
+> **Note**: the above table assumes official Bot API instance, hosted at `api.telegram.org`.
+> Self-hosted and/or custom Bot API instances bypass some of these limitations.
+
+## Why not MTProto?
 
 Everything has its drawbacks though.
 
 Using mtcute instead of Bot API (or TDLib) for high-load bots might currently
 not be the best idea, since TDLib caches basically everything, while mtcute doesn't.
-This is our primary focus for the next releases, though.
+This is our primary focus for the upcoming releases, though.
 
 If your bot is high-load, and you receive errors like 500 and 429, this
 definitely means a problem on mtcute side. Please
 [let us know](https://t.me/mt_cute), so we can
 investigate further.
 
+Another drawback is that due to mtcute being an enthusiast project,
+it does not offer the same level of robustness and support as Bot API,
+and is missing some features that Bot API has.
