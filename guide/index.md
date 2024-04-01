@@ -59,6 +59,17 @@ pnpm add @mtcute/crypto-node
 When using `@mtcute/node`, native addon is loaded automatically,
 no extra steps are required.
 
+## Bun
+
+Experimental support for Bun is provided in `@mtcute/bun` package, and
+Bun is also supported in `@mtcute/create-bot`.
+
+```bash
+bun create @mtcute/bot my-awesome-bot
+# or add to an existing project
+bun add @mtcute/bun
+```
+
 ## Browser
 
 For browsers, it is recommended to use [vite](https://vitejs.dev). 
@@ -102,14 +113,6 @@ See also: [Tree-shaking](/guide/advanced/treeshaking.md)
 
 mtcute strives to be as runtime-agnostic as possible, so it should work in any environment that supports 
 some basic ES2020 features.
-
-### Bun
-
-There is currently no special package for Bun, but the Node.js package should work just fine for now.
-It won't use Bun-specific APIs, which might be suboptimal, but it should work.
-
-If there are some compatibility issues (i.e. something works in Node.js and doesn't in Bun),
-it might be better to open an issue at Bun's repository instead.
 
 ### Deno
 
