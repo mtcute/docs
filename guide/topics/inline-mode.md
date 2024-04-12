@@ -51,5 +51,5 @@ const res = await tg.call({
     queryId: results.queryId,
     id: first.id
 })
-tg.network.handleUpdate(res, true)
+tg.handleClientUpdate(res, true)
 ```

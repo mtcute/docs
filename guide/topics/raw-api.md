@@ -73,26 +73,26 @@ These functions will throw in case the peer is of wrong type
 
 Some RPC methods return `Updates` type. For these methods,
 it is important that they are properly handled by Updates manager.
-This is done by calling `tg.network.handleUpdate` method:
+This is done by calling `tg.handleClientUpdate` method:
 
 ```ts
 const res = await tg.call({ _: 'contacts.addContact', ... })
-tg.network.handleUpdate(res)
+tg.handleClientUpdate(res)
 ```
 
 ::: tip
-Calling `tg.network.handleUpdate` will not dispatch all the updates contained
+Calling `tg.handleClientUpdate` will not dispatch all the updates contained
 in that object. This is sometimes undesirable, and can be avoided
 by passing `false` as the second argument:
 
 ```ts
-tg.network.handleUpdate(res, false)
+tg.handleClientUpdate(res, false)
 ```
 :::
 
 ::: details Why is this important?
 When RPC method returns `Updates`, it might have newer PTS and SEQ values.
-If it does, passing it to `network.handleUpdate` makes the library aware of those
+If it does, passing it to `handleClientUpdate` makes the library aware of those
 new updates. Otherwise, library would have to re-fetch them the next
 time an update is encountered.
 
@@ -107,7 +107,7 @@ Some methods return not updates, but a class like
 
 They also contain PTS values, and should also be handled.
 But since this is not an update, it can't be passed directly
-to `network.handleUpdate`, and instead a "dummy" update is created:
+to `handleClientUpdate`, and instead a "dummy" update is created:
 
 ```ts
 const res = await this.call({
@@ -115,7 +115,7 @@ const res = await this.call({
     id: [1, 2, 3],
 })
 const upd = createDummyUpdate(res.pts, res.ptsCount)
-tg.network.handleUpdate(upd)
+tg.handleClientUpdate(upd)
 ```
 
 Or, in case this PTS is related to a channel:
@@ -128,7 +128,7 @@ const res = await this.call({
     id: [1, 2, 3],
 })
 const upd = createDummyUpdate(res.pts, res.ptsCount, channel.channelId)
-tg.network.handleUpdate(upd)
+tg.handleClientUpdate(upd)
 ```
 
 ## Files and media
