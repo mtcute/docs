@@ -60,11 +60,11 @@ await conv.sendMediaGroup(['BQACAgEAAx...Z2mGB8E', 'BQACAgEAAx...Z2mGB8E'])
 ```
 
 **DO NOT** use client methods like `tg.sendText`, because conversation state 
-won't proparly be updated.
+won't properly be updated.
 
 ## Waiting for events
 
-Currently, Conversation supports waiting for new messages, edits and read
+Currently, `Conversation` supports waiting for new messages, edits and read
 acknowledgments:
 
 ```ts
