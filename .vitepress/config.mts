@@ -92,6 +92,7 @@ export default ({ mode }) => defineConfig({
             { text: "Rate limit", link: "/guide/dispatcher/rate-limit" },
             { text: "Child Dispatchers", link: "/guide/dispatcher/children" },
             { text: "Scenes", link: "/guide/dispatcher/scenes" },
+            { text: "Dependency Injection", link: "/guide/dispatcher/di" },
           ],
         },
         {
