@@ -70,6 +70,27 @@ bun create @mtcute/bot my-awesome-bot
 bun add @mtcute/bun
 ```
 
+## Deno
+
+Experimental support for Deno is provided in `@mtcute/deno` package, which is published
+to the [jsr.io](https://jsr.io) registry:
+
+```ts
+import { TelegramClient } from 'jsr:@mtcute/deno'
+
+const tg = new TelegramClient({
+  apiId: 123456,
+  apiHash: '0123456789abcdef0123456789abcdef',
+  storage: 'my-account' // will use sqlite-based storage
+})
+
+await tg.start()
+```
+
+```bash
+deno run -A --unstable-ffi your-script.ts
+```
+
 ## Browser
 
 For browsers, it is recommended to use [vite](https://vitejs.dev). 
@@ -114,13 +135,7 @@ See also: [Tree-shaking](/guide/advanced/treeshaking.md)
 mtcute strives to be as runtime-agnostic as possible, so it should work in any environment that supports 
 some basic ES2020 features.
 
-### Deno
-
-Deno is not actively supported right now, but `npm:@mtcute/web` should work fine for now.
-
-### Anything else?
-
-In case your runtime of choice is not listed above, you can try using `@mtcute/core` directly.
+In case your runtime of choice is not listed above, you can try using `@mtcute/core` directly
 
 You will need to provide your own implementations of storage, networking and crypto - feel free to take a 
 look at web/node implementations for reference (or even extend them to better fit your needs, e.g. if some runtime
