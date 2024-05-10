@@ -210,7 +210,7 @@ This currently only happens for `msg.sender` field for non-bot accounts in chats
 so if you're only ever going to work with bots, you can safely ignore this section. 
 
 ::: tip
-Complete peers ≠ [full peers](https://ref.mtcute.dev/classes/_mtcute_client.index.TelegramClient.html#getFullChat)!
+Complete peers ≠ [full peers](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#getFullChat)!
 
 - Incomplete are seen in updates in rare cases, and are missing some fields (e.g. username)
 - Complete peers are pretty much all the other peer objects you get in updates
