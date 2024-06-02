@@ -109,7 +109,7 @@ Your best bet on improving update latency is to:
   - Periodically call `setOffline(false)` to tell Telegram that you are online
   - Use an account in the same DC as the peer you are interacting with
 
-## Why do I get PEER_ID_INVALID?
+## Why do I get PEER_ID_INVALID/MtPeerNotFoundError?
 
 First, make sure that the ID you pass is actually correct.
 
@@ -120,6 +120,14 @@ you need access hash to interact with the user, which is only sent by the server
 Think of how you find peers in normal clients - you search for usernames,
 open them from dialogs, messages, members lists, etc. The same goes for
 mtcute - you need to encounter the user before you can interact with them.
+
+Some ideas on how you can fix this:
+  - Use [`findDialogs`](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#findDialogs) method
+    to iterate over all dialogs and find the one you need
+  - Use a username/phone number instead of ID
+  - Use [`getMessages`](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#getMessages) method
+    and fetch some message by the user (so mtcute caches the access hash)
+  - ...and a lot more ways to "meet" a user without interacting with them
 
 ## Why is my verification code expired?
 
