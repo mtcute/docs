@@ -80,6 +80,16 @@ dp.onNewMessage(async (msg, state) => {
 })
 ```
 
+To make the dispatcher immediately dispatch the update to the
+root dispatcher, use `PropagationAction.ToScene`:
+
+```ts
+dp.onNewMessage(async (msg, state) => {
+  await state.exit()
+  return PropagationAction.ToScene
+})
+```
+
 Entering another scene will also exit the current one.
 
 ## Isolated state
@@ -192,3 +202,44 @@ wizard.setDefaultState({ name: 'Ivan' })
 ```
 
 By default, `{}` is used as the default state.
+
+## Transition updates
+
+Whenever you `.enter()` or `.exit()` a scene, the dispatcher will also emit
+a transition update, which can be caught by using `onSceneTransition`:
+
+```ts
+scene.onSceneTransition(async (upd, state) => {
+  console.log(`Transition from ${upd.previousScene} to SomeScene`)
+})
+```
+
+These handlers are called **before** any of the scene's handlers are called,
+even if `PropagationAction.ToScene` is used, and can be used to cancel the transition:
+
+```ts
+dp.onNewMessage(async (msg, state) => {
+  await state.enter(SomeScene)
+  return PropagationAction.ToScene
+})
+
+SomeScene.onSceneTransition(async (upd, state) => {
+  await state.exit()
+  return PropagationAction.Stop
+})
+
+SomeScene.onNewMessage(async (msg, state) => {
+  await msg.replyText('This will never be called')
+})
+```
+
+The update which triggered the transition is passed to the handler, and
+you can use it to decide whether to cancel the transition or not:
+
+```ts
+SomeScene.onSceneTransition(async (upd, state) => {
+  if (upd.message.text === 'cancel') {
+    return PropagationAction.Stop
+  }
+})
+```
