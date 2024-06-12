@@ -111,6 +111,17 @@ Once you're done, you can close the chat by calling `closeChat`:
 await tg.closeChat('durov')
 ```
 
+::: danger
+Opening a chat with `openChat` method will make the library make additional requests every so often.
+
+Which means that you should **avoid opening more than 5-10 chats at once**, as it will probably trigger
+server-side limits and you might start getting transport errors or even get banned.
+
+If missing *some* updates from *some* channels (or having them arrive a bit late) is acceptable for you,
+you might want to consider not opening them at all. You will still receive updates for channels
+you are a member of, but they might be delayed. 
+:::
+
 ## Dispatcher
 
 Dispatcher is a class that dispatches client events to registered handlers,
