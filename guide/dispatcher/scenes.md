@@ -154,7 +154,7 @@ interface RegForm {
   name?: string
 }
 
-const wizard = WizardScene.for<RegForm>()
+const wizard = new WizardScene<RegForm>('REGISTRATION')
 
 wizard.addStep(async (msg) => {
   await msg.answerText('What is your name?',  {
