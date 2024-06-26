@@ -91,6 +91,12 @@ await tg.start()
 deno run -A --unstable-ffi your-script.ts
 ```
 
+Deno is also supported in `@mtcute/create-bot`, which is only available in npm:
+
+```bash
+deno run -A npm:@mtcute/create-bot my-awesome-bot
+```
+
 ## Browser
 
 For browsers, it is recommended to use [vite](https://vitejs.dev). 
