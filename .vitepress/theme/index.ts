@@ -10,6 +10,8 @@ import EmbedPost from '../components/EmbedPost.vue'
 // @ts-ignore
 import VImg from '../components/VImg.vue'
 // @ts-ignore
+import Tag from '../components/Tag.vue'
+// @ts-ignore
 import Layout from './Layout.vue'
 
 import './style.css'
@@ -20,6 +22,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     app.component('v-img', VImg)
     app.component('EmbedPost', EmbedPost)
+    app.component('Tag', Tag)
     vitepressBackToTop({
       threshold: 300
     })

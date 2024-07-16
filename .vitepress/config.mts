@@ -109,6 +109,7 @@ export default ({ mode }) => defineConfig({
             { text: "Tree-shaking", link: "/guide/advanced/treeshaking" },
             { text: "Workers", link: "/guide/advanced/workers" },
             { text: "Converting sessions", link: "/guide/advanced/session-convert" },
+            { text: "Network middlewares", link: "/guide/advanced/net-middlewares" },
           ]
         }
       ],
