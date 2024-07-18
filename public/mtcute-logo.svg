@@ -1,53 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   class="img-fluid"
-   id="outputsvg"
-   width="255.99998"
-   height="256"
-   viewBox="0 0 2559.9999 2559.9999"
-   version="1.1"
-   sodipodi:docname="mtcute.svg"
-   inkscape:version="1.3 (0e150ed, 2023-07-21)"
-   inkscape:export-filename="mtcute-logo.svg"
-   inkscape:export-xdpi="20.91"
-   inkscape:export-ydpi="20.91"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs52" />
-  <sodipodi:namedview
-     id="namedview50"
-     pagecolor="#505050"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:showpageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#505050"
-     showgrid="false"
-     inkscape:zoom="0.38321807"
-     inkscape:cx="313.13763"
-     inkscape:cy="459.26853"
-     inkscape:window-width="1440"
-     inkscape:window-height="847"
-     inkscape:window-x="0"
-     inkscape:window-y="25"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="outputsvg" />
-  <g
-     id="g1"
-     transform="matrix(0.49896969,0,0,0.49896969,525.52516,707.8487)">
-    <path
-       style="fill:#f69ddc;fill-opacity:1;stroke-width:2.18458"
-       d="M 1987.9047,38.991036 445.51814,677.28769 c -247.31038,99.25609 -308.29552,186.8294 -333.08196,259.38443 -22.88854,66.99948 -54.466539,198.07268 274.48351,273.11498 334.55817,76.3218 699.85861,121.4646 699.85861,121.4646 0,0 162.029,30.6504 229.4316,-34.6568 80.686,-78.1777 848.7824,-1202.737434 848.7824,-1202.737434 47.7352,-74.66487 33.2091,-137.264937 -177.0876,-54.86643 z"
-       id="path2"
-       sodipodi:nodetypes="ccsscscc" />
-    <path
-       style="fill:#c890d6;fill-opacity:1;stroke-width:2.18458"
-       d="m 2398.5251,289.38667 -55.1,1668.33533 c -5.9422,266.4186 -66.4742,354.3056 -125.6778,403.0248 -54.6701,44.9885 -166.2652,120.645 -352.1983,-160.9014 -189.1032,-286.3464 -359.8303,-612.4359 -359.8303,-612.4359 0,0 -85.6744,-140.8998 -48.2431,-226.9639 44.8083,-103.0251 827.4101,-1217.53907 827.4101,-1217.53907 53.108,-70.943912 116.8178,-79.360767 113.6394,146.48014 z"
-       id="path2-2"
-       sodipodi:nodetypes="ccsscscc" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="363" viewBox="0 0 400 363">
+  <defs/>
+  <path fill="#DE6FBE" d="M299.961,8.049 C328.659,24.617 338.492,61.312 321.923,90.01 L304.003,121.049 L340,121.049 C373.137,121.049 400,147.911 400,181.048 C400,214.186 373.137,241.048 340,241.048 L303.766,241.048 L321.923,272.497 C338.492,301.195 328.659,337.89 299.961,354.459 C271.264,371.027 234.568,361.195 218,332.497 L78,90.01 C61.431,61.312 71.264,24.617 99.961,8.049 C128.659,-8.52 165.354,1.312 181.923,30.01 L199.961,61.254 L218,30.01 C234.568,1.312 271.264,-8.52 299.961,8.049 Z"/>
+  <path fill="#F69DDC" d="M252.093,210.96 C268.661,182.262 258.829,145.567 230.131,128.998 C219.617,122.928 208.028,120.401 196.75,121.048 L60,121.048 C26.863,121.048 0,147.911 0,181.049 C0,214.186 26.863,241.049 60,241.049 L96.157,241.049 L78.169,272.204 C61.601,300.901 71.433,337.596 100.131,354.165 C128.829,370.734 165.524,360.901 182.093,332.204 L252.093,210.96 Z"/>
 </svg>

@@ -6,7 +6,7 @@ hero:
   name: "mtcute"
   tagline: Modern TypeScript library for MTProto
   image:
-    src: /mtcute-logo.svg
+    src: /mtcute-logo.png
   actions:
     - theme: brand
       text: Quick Start →

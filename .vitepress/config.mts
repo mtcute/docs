@@ -119,6 +119,7 @@ export default ({ mode }) => defineConfig({
       message: "mtcute is not affiliated with Telegram.",
       copyright:
         'This documentation is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br/>' +
+        'Logo by <a href="//t.me/AboutTheDot">@dotvhs</a><br/>' +
         '© Copyright 2021-present, <a href="//github.com/teidesu">teidesu</a> ❤️',
     },
   },
