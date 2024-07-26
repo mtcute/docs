@@ -145,7 +145,7 @@ dp.onNewMessage(async (msg) => {
   await msg.forwardTo('me')
 })
 
-tg.run()
+await tg.start()
 ```
 
 Pretty simple, right? We have registered a "new message" handler and made

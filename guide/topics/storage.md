@@ -103,9 +103,8 @@ applications to a server, where you'll be using another storage.
 To generate a session string, simply call `exportSession`:
 
 ```ts
-tg.run({}, async () => {
-    console.log(await tg.exportSession())
-})
+await tg.start()
+console.log(await tg.exportSession())
 ```
 
 This will output a fairly long string (about 400 chars) to your console,
@@ -116,7 +115,7 @@ const tg = new TelegramClient({...})
 
 await tg.importSession(SESSION_STRING)
 // or
-tg.run({ session: SESSION_STRING })
+await tg.start({ session: SESSION_STRING })
 ```
 
 You can import session into any storage, including in-memory storage.

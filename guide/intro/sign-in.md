@@ -44,13 +44,12 @@ const tg = new TelegramClient({
   apiHash: 'API_HASH'
 })
 
-tg.run({
+const self = await tg.start({
   phone: () => tg.input('Phone > '),
   code: () => tg.input('Code > '),
   password: () => tg.input('Password > ')
-}, async (self) => {
-  console.log(`Logged in as ${self.displayName}`)
 })
+console.log(`Logged in as ${self.displayName}`)
 ```
 
 ::: tip
@@ -60,17 +59,6 @@ that will ask you for input in the console.
 It's not available in `@mtcute/core`, since it is platform-agnostic
 :::
 
-`.run()` is a convenient wrapper method over `.start()` that logs you in using
-the given parameters and then calls a given function with the current user, and 
-handles all errors with the client's error handler.
-
-When top-level await is available, you may want to use `.start()` directly instead:
-
-```ts
-const self = await tg.start({ ... })
-
-console.log(`Logged in as ${self.displayName}`)
-```
 
 ## Signing in as a bot
 
@@ -84,11 +72,10 @@ const tg = new TelegramClient({
   apiHash: 'API_HASH'
 })
 
-tg.run({
+const self = await tg.start({
   botToken: '12345678:0123456789abcdef0123456789abcdef'
-}, async (self) => {
-  console.log(`Logged in as ${self.displayName}`)
 })
+console.log(`Logged in as ${self.displayName}`)
 ```
 
 ## Storing your API ID and Hash
@@ -129,7 +116,7 @@ refer to [Transport](../topics/transport.html#http-s-proxy-transport) documentat
 
 ## Manual sign in
 
-So far we've only discussed the `.run`/`.start` helper methods. 
+So far we've only discussed the `.start` helper method.
 
 While they do provide some flexibility and convenience, they are not always
 suitable for every use case. For example, when building a web application,
@@ -232,4 +219,4 @@ if (await checkSignedIn()) {
 }
 ```
 
-`tg.start`/`tg.run` methods do this automatically for you.
+`tg.start` method does this automatically for you.
