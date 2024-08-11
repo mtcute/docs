@@ -12,7 +12,7 @@ and never persist it anywhere, and this is exactly
 what `MemoryStorage` does.
 
 ```ts{4}
-import { MemoryStorage } from '@mcute/core'
+import { MemoryStorage } from '@mtcute/core'
 
 const tg = new TelegramClient({
     storage: new MemoryStorage()
@@ -37,7 +37,7 @@ mtcute implements it in a separate package, `@mtcute/sqlite`, and internally
 uses [better-sqlite3](https://www.npmjs.com/package/better-sqlite3)
 
 ```ts{4}
-import { SqliteStorage } from '@mcute/sqlite'
+import { SqliteStorage } from '@mtcute/sqlite'
 
 const tg = new TelegramClient({
     storage: new SqliteStorage('my-account.session')
