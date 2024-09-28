@@ -128,6 +128,20 @@ Some ideas on how you can fix this:
   - Use [`getMessages`](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#getMessages) method
     and fetch some message by the user (so mtcute caches the access hash)
   - ...and a lot more ways to "meet" a user without interacting with them
+  
+### Why do I get "Peer ... is not found in local cache"?
+
+For a similar reason. In some cases, Telegram will send an [incomplete](../topics/peers.html#incomplete-peers) 
+peer object, which is not enough to interact with the user. 
+
+mtcute tries its best to fill in the missing fields on demand 
+(whenever you use `.resolvePeer` or any other method that uses it under the hood), 
+but sometimes it unfortunately fails. There isn't much we can do about it :c
+
+By the way, there's an [`isPeerAvailable`](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#isPeerAvailable) 
+method that you can use to check if a peer is available, that *never* does any network requests.
+Do note, however, that it is prone to false negatives, meaning that `resolvePeer` *might* still work
+if that method returns `false`, but should always work if it returns `true`.
 
 ## Why is my verification code expired?
 

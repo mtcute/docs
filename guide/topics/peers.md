@@ -203,11 +203,11 @@ And then, to convert it back to bare ID, use the exact same operation
 
 ## Incomplete peers
 
-In some rare cases, mtcute may not be able to immediately provide you with complete information 
+In some cases, mtcute may not be able to immediately provide you with complete information 
 about a user/chat (see [min constructors](https://core.telegram.org/api/min) in MTProto docs).
 
-This currently only happens for `msg.sender` field for non-bot accounts in chats larger than 40k members, 
-so if you're only ever going to work with bots, you can safely ignore this section. 
+This currently only seems to happen for `msg.sender` and `msg.chat` fields for non-bot accounts in large chats,
+so if you're only ever going to work with bots, you can safely ignore this section (for now?). 
 
 ::: tip
 Complete peers ≠ [full peers](https://ref.mtcute.dev/classes/_mtcute_core.highlevel_client.TelegramClient.html#getFullChat)!
@@ -225,7 +225,8 @@ For example, such `User` objects may have the following data missing or have inc
  - `.username` may be missing
  - `.photo` may be missing with some privacy settings
  - online status may be incorrect
- - and probably more
+ - and probably more (for more info please consult the official docs for [user](https://core.telegram.org/constructor/user)
+   and [channel](https://core.telegram.org/constructor/channel))
 
 The user itself is still usable, though. If you need to get the missing information, you can call
 `getUsers`/`getChat` method, which will return a complete `User`/`Chat` object.
@@ -235,15 +236,16 @@ const user = ... // incomplete user from somewhere
 const [completeUser] = await tg.getUsers(user)
 ```
 
-If you are using [Dispatcher](/guide/dispatcher/intro.md), you can use `.getCompleteSender()` method instead:
+If you are using [Dispatcher](/guide/dispatcher/intro.md), you can use `.getCompleteSender()` or `.getCompleteChat()` methods instead:
 
 ```ts
 dp.onNewMessage(async (msg) => {
     const sender = await msg.getCompleteSender()
+    const chat = await msg.getCompleteChat()
 })
 ```
 
-Or you can use `withCompleteSender` middleware-like filter:
+Or you can use `withCompleteSender` and `withCompleteChat` middleware-like filters:
 
 ```ts
 dp.onNewMessage(
