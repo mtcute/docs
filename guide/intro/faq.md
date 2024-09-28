@@ -203,3 +203,28 @@ to recover your account:
 [recover@telegram.org](mailto:recover@telegram.org).
 
 If you don't, then welp. Create a new account and be *even more* careful.
+
+
+## How to know when I'm banned
+
+When an account is banned, any network request will fail with `USER_DEACTIVATED_BAN`,
+even simple ones like `getMe`.
+
+You can also use a [network middleware](../advanced/net-middlewares.md#errors-in-middlewares)
+to set up a client-wide listener for this error:
+
+```ts
+const tg = new TelegramClient({
+    ...,
+    network: {
+      middlewares: [
+        networkMiddlewares.onRpcError((ctx, error) => {
+          if (error.errorMessage === 'USER_DEACTIVATED_BAN') {
+            console.log('account was banned :c')
+            tg.close()
+          }
+        }),
+        networkMiddlewares.basic()
+      ]
+    }
+})

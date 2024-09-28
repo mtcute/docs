@@ -74,6 +74,24 @@ const myMiddleware: RpcCallMiddleware = async (ctx, next) => {
 }
 ```
 
+You can also use `networkMiddlewares.onRpcError` helper to create a middleware that only handles RPC errors:
+
+```ts
+const client = new TelegramClient({
+    ...,
+    network: {
+        middlewares: [
+            networkMiddlewares.onRpcError(async (ctx, error) => {
+                if (error.errorMessage === 'PEER_ID_INVALID') {
+                    logPeerIdInvalid(ctx.request)
+                }
+            }),
+            networkMiddlewares.basic()
+        ]
+    }
+})
+```
+
 ### Modifying request
 
 In some cases, it might make sense to modify the request before sending.
