@@ -224,7 +224,7 @@ const tg = new TelegramClient({
             tg.close()
           }
         }),
-        networkMiddlewares.basic()
+        ...networkMiddlewares.basic()
       ]
     }
 })
